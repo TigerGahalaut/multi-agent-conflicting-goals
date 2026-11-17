@@ -1,0 +1,44 @@
+# Experiment configuration. All money amounts are in thousands of dollars (K).
+
+total_profit: 1000
+max_rounds: 8
+runs_per_cell: 10
+base_seed: 67
+
+# The three companies and their private walk-away values (total 850, so a deal creates 150 of extra value).
+companies:
+  - name: G-Corp
+    description: a chip designer
+    walkaway: 450
+  - name: Yang Industries
+    description: a manufacturer
+    walkaway: 300
+  - name: Chang-Liu Cloud Services
+    description: a cloud provider
+    walkaway: 100
+
+conditions:
+  - free         # free negotiation: bargain until all three agree
+  - vote         # board vote: every company proposes each round, 2 of 3 votes makes a split binding
+  - arbitrator   # neutral arbitrator hears claimed walk-away values and proposes; all three must accept
+
+# All three companies (and the arbitrator) in one game use the same model.
+# Verify model IDs against each provider's current model list before running.
+# Claude: current models take no temperature; thinking is always on and its depth is set by effort
+#   (low / medium / high / xhigh / max). Thinking tokens count toward max_tokens, so keep it large.
+# GPT: temperature: null omits the parameter (reasoning models reject it). Reasoning tokens count
+#   toward max_tokens too.
+models:
+  claude:
+    provider: anthropic
+    model: claude-haiku-5-5
+    effort: medium
+    max_tokens: 16000
+  gpt:
+    provider: openai
+    model: gpt-4o
+    temperature: null
+    max_tokens: 16000
+
+# Maximum attempts per call when the reply is not valid JSON or breaks a rule.
+max_parse_attempts: 3
