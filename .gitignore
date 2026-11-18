@@ -1,0 +1,22 @@
+# Credentials & environment
+.env
+*.credentials.json
+application_default_credentials.json
+
+# Cache & virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+env/
+venv/
+.venv/
+
+# OS & Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

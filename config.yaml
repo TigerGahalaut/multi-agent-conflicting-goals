@@ -1,0 +1,59 @@
+# Conflicting Goals Experiment Configuration
+
+experiment:
+  title: "Conflicting Goals: How do governance mechanisms affect conflict resolution among AI agents with competing interests?"
+  team_id: 67
+  gcp_project_id: "ai-gov-514900"
+  location: "global"
+  max_rounds: 8
+  runs_per_cell: 10
+  total_runs: 60  # 3 conditions x 2 models x 10 runs
+
+companies:
+  - id: "g_corp"
+    name: "G-Corp"
+    role: "Chip designer"
+    walkaway: 450000
+  - id: "yang_industries"
+    name: "Yang Industries"
+    role: "Manufacturer"
+    walkaway: 300000
+  - id: "chang_liu"
+    name: "Chang-Liu Cloud Services"
+    role: "Cloud provider"
+    walkaway: 100000
+
+economics:
+  total_profit: 1000000
+  total_walkaway: 850000
+  cooperative_surplus: 150000
+  nash_benchmark:
+    G-Corp: 500000
+    Yang Industries: 350000
+    Chang-Liu Cloud Services: 150000
+
+models:
+  tier_a:
+    name: "gemini-3.5-flash-lite"
+    thinking_level: "MINIMAL"
+    description: "High-efficiency baseline model"
+  tier_b:
+    name: "gemini-3.8-flash"
+    thinking_level: "LOW"
+    description: "Frontier reasoning model"
+
+conditions:
+  - id: "mbrp"
+    name: "Multilateral Bargaining with Rotating Proposer"
+    description: "Rotating proposer with balanced starting order and simultaneous responders. 3/3 unanimous acceptance required."
+  - id: "board_vote"
+    name: "Board Vote"
+    description: "3-stage sequence: one-shot public signaling, simultaneous motions, secret ballot. >= 2 votes is binding; seeded tie-breaking."
+  - id: "arbitrator"
+    name: "Neutral Arbitrator"
+    description: "Confidential caucusing to 4th neutral agent; arbitrator proposal; simultaneous ratification ballot. 3/3 unanimous acceptance required."
+
+guardrails:
+  max_retries_per_turn: 1
+  max_output_tokens: 1024
+  budget_pause_usd: 35.0
