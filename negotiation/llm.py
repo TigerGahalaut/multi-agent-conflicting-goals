@@ -73,6 +73,62 @@ class OpenAIClient:
         )
 
 
+class GeminiClient:
+    """Client for Google Vertex AI Gemini models using google-genai SDK with exponential backoff."""
+
+    def __init__(self, model: str, max_tokens: int = 8192, thinking_level: str | None = None,
+                 project: str = "ai-gov-514900", location: str = "global", max_retries: int = 5):
+        from google import genai
+
+        self.client = genai.Client(vertexai=True, project=project, location=location)
+        self.model = model
+        self.max_tokens = max_tokens
+        self.thinking_level = thinking_level
+        self.max_retries = max_retries
+
+    def complete(self, system: str, user: str, step: str = "", meta: dict | None = None) -> LLMResponse:
+        import time
+        from google.genai import types
+
+        config_kwargs = {
+            "system_instruction": system,
+            "response_mime_type": "application/json",
+            "max_output_tokens": self.max_tokens,
+        }
+        if self.thinking_level:
+            config_kwargs["thinking_config"] = types.ThinkingConfig(thinking_level=self.thinking_level)
+
+        last_exc = None
+        for attempt in range(self.max_retries + 1):
+            try:
+                resp = self.client.models.generate_content(
+                    model=self.model,
+                    contents=user,
+                    config=types.GenerateContentConfig(**config_kwargs),
+                )
+
+                usage = getattr(resp, "usage_metadata", None)
+                in_tok = getattr(usage, "prompt_token_count", 0) if usage else 0
+                out_tok = getattr(usage, "candidates_token_count", 0) if usage else 0
+                model_version = getattr(resp, "model_version", self.model) or self.model
+
+                return LLMResponse(
+                    resp.text or "",
+                    in_tok,
+                    out_tok,
+                    model_version,
+                    "stop",
+                )
+            except Exception as e:
+                last_exc = e
+                if attempt < self.max_retries:
+                    delay = 3.0 * (2 ** attempt)  # 3s, 6s, 12s, 24s, 48s
+                    print(f"\n[GeminiClient] Rate limit or transient error ({e}). Retrying in {delay:.1f}s (attempt {attempt + 1}/{self.max_retries})...", flush=True)
+                    time.sleep(delay)
+
+        raise last_exc
+
+
 class MockClient:
     """Returns random but well-formed replies so the pipeline can run without API keys."""
 
@@ -131,4 +187,12 @@ def make_client(model_cfg: dict | None, mock_seed: int | None = None):
         return AnthropicClient(model_cfg["model"], max_tokens, model_cfg.get("effort"))
     if provider == "openai":
         return OpenAIClient(model_cfg["model"], model_cfg.get("temperature"), max_tokens)
+    if provider in ("gemini", "google", "vertex"):
+        return GeminiClient(
+            model_cfg["model"],
+            max_tokens,
+            model_cfg.get("thinking_level"),
+            project=model_cfg.get("project", "ai-gov-514900"),
+            location=model_cfg.get("location", "global"),
+        )
     raise ValueError(f"Unknown provider: {provider}")

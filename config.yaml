@@ -29,6 +29,16 @@ conditions:
 # GPT: temperature: null omits the parameter (reasoning models reject it). Reasoning tokens count
 #   toward max_tokens too.
 models:
+  gemini_flash_lite:
+    provider: gemini
+    model: gemini-3.5-flash-lite
+    thinking_level: MINIMAL
+    max_tokens: 8192
+  gemini_flash:
+    provider: gemini
+    model: gemini-3.8-flash
+    thinking_level: LOW
+    max_tokens: 8192
   claude:
     provider: anthropic
     model: claude-haiku-5-5
