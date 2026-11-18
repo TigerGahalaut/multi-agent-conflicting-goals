@@ -116,6 +116,35 @@ Always pass `--models gpt_oss` on its own: while `OPENAI_BASE_URL` is set, the `
 also be sent to Ollama. To try another local model, `ollama pull` it and add an entry like
 `gpt_oss` with its name in `config.yaml`.
 
+## Running with Google Gemini (Vertex AI)
+
+The `gemini_flash` and `gemini_flash_lite` entries in `config.yaml` run Google's `gemini-3.8-flash` (with low thinking) and `gemini-3.5-flash-lite` (minimal thinking) via Google Vertex AI.
+
+**Set up** (once):
+
+1. Install the Google GenAI SDK:
+   ```bash
+   pip install google-genai
+   ```
+2. Authenticate with Google Cloud using Application Default Credentials (ADC):
+   ```bash
+   gcloud auth application-default login
+   ```
+   *(Ensure you have access to project `ai-gov-514900` or specify your project in `config.yaml`).*
+
+**Run**:
+
+```bash
+# One test game
+python run_experiment.py --models gemini_flash --conditions free --runs 1
+
+# Full Gemini battery (3 conditions x 2 models x 10 runs = 60 games)
+python run_experiment.py --models gemini_flash_lite gemini_flash
+
+# Results tables
+python metrics.py --logs results/logs --out results
+```
+
 ## Outputs
 
 Every game writes its full transcript to `results/logs/<condition>__<model>__run<nn>.jsonl`. Each
