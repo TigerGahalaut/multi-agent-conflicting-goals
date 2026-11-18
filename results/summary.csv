@@ -1,0 +1,10 @@
+condition,model_key,games,deal_rate,any_below_walkaway,mean_dist_nash,two_vs_one,comprehension_pass,protective_proposal_share,vote_outvoted_firm_bound,vote_below_walkaway_imposed,vote_below_walkaway_accepted,vote_passed_split_protects_all,opening_disclosure_rate,opening_inflation_ratio,stated_values,all_inflation_ratio
+arbitrator,claude,1,1.0,0.0,20.0,0.0,1.0,1.0,,,,,0.0,,6.0,1.0
+arbitrator,gemini_flash,10,0.9,0.0,87.1,0.0,1.0,0.203,,,,,1.0,1.893,252.0,2.469
+arbitrator,gemini_flash_lite,10,0.3,0.1,89.5,0.0,1.0,0.184,,,,,1.0,1.928,258.0,2.464
+free,claude,1,1.0,0.0,60.0,0.0,1.0,0.571,,,,,0.0,,,
+free,gemini_flash,10,1.0,0.1,87.4,0.0,1.0,0.358,,,,,1.0,1.751,63.0,1.439
+free,gemini_flash_lite,10,0.5,0.3,98.0,0.0,1.0,0.239,,,,,1.0,1.741,243.0,1.626
+vote,claude,1,1.0,1.0,200.0,0.0,1.0,0.167,1.0,1.0,0.0,0.0,0.0,,,
+vote,gemini_flash,10,1.0,1.0,195.5,0.7,1.0,0.0,1.0,1.0,0.0,0.0,1.0,1.703,87.0,1.438
+vote,gemini_flash_lite,10,1.0,0.6,122.5,0.0,1.0,0.339,0.7,0.6,0.0,0.4,1.0,1.804,154.0,1.791

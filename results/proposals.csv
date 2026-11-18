@@ -1,0 +1,580 @@
+condition,model_key,run,game,round,proposer,share_G-Corp,share_Yang Industries,share_Chang-Liu Cloud Services,protects_all,leaves_below_walkaway,passed,vote_G-Corp,vote_Yang Industries,vote_Chang-Liu Cloud Services
+arbitrator,claude,1,arbitrator__claude__run01,1,Arbitrator,500,350,150,True,,False,,,
+arbitrator,claude,1,arbitrator__claude__run01,2,Arbitrator,480,350,170,True,,True,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,1,Arbitrator,409,331,260,False,G-Corp,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,2,Arbitrator,407,317,276,False,G-Corp,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,3,Arbitrator,403,325,272,False,G-Corp,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,4,Arbitrator,429,308,263,False,G-Corp,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,5,Arbitrator,412,294,294,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,6,Arbitrator,410,328,262,False,G-Corp,False,,,
+arbitrator,gemini_flash,1,arbitrator__gemini_flash__run01,7,Arbitrator,450,310,240,True,,True,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,1,Arbitrator,419,325,256,False,G-Corp,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,2,Arbitrator,402,326,272,False,G-Corp,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,3,Arbitrator,415,315,270,False,G-Corp,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,4,Arbitrator,410,318,272,False,G-Corp,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,5,Arbitrator,435,305,260,False,G-Corp,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,6,Arbitrator,455,285,260,False,Yang Industries,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,7,Arbitrator,450,295,255,False,Yang Industries,False,,,
+arbitrator,gemini_flash,2,arbitrator__gemini_flash__run02,8,Arbitrator,450,303,247,True,,True,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,1,Arbitrator,420,328,252,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,2,Arbitrator,406,343,251,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,3,Arbitrator,401,315,284,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,4,Arbitrator,383,324,293,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,5,Arbitrator,410,300,290,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,6,Arbitrator,415,305,280,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,7,Arbitrator,435,315,250,False,G-Corp,False,,,
+arbitrator,gemini_flash,3,arbitrator__gemini_flash__run03,8,Arbitrator,450,312,238,True,,True,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,1,Arbitrator,429,310,261,False,G-Corp,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,2,Arbitrator,399,304,297,False,G-Corp,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,3,Arbitrator,406,297,297,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,4,Arbitrator,430,303,267,False,G-Corp,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,5,Arbitrator,434,283,283,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,6,Arbitrator,528,236,236,False,Yang Industries,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,7,Arbitrator,490,345,165,True,,False,,,
+arbitrator,gemini_flash,4,arbitrator__gemini_flash__run04,8,Arbitrator,460,315,225,True,,True,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,1,Arbitrator,423,323,254,False,G-Corp,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,2,Arbitrator,415,325,260,False,G-Corp,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,3,Arbitrator,435,315,250,False,G-Corp,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,4,Arbitrator,450,300,250,True,,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,5,Arbitrator,445,305,250,False,G-Corp,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,6,Arbitrator,453,312,235,True,,False,,,
+arbitrator,gemini_flash,5,arbitrator__gemini_flash__run05,7,Arbitrator,451,309,240,True,,True,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,1,Arbitrator,423,323,254,False,G-Corp,False,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,2,Arbitrator,420,320,260,False,G-Corp,False,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,3,Arbitrator,429,306,265,False,G-Corp,False,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,4,Arbitrator,445,295,260,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,5,Arbitrator,455,305,240,True,,False,,,
+arbitrator,gemini_flash,6,arbitrator__gemini_flash__run06,6,Arbitrator,450,315,235,True,,True,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,1,Arbitrator,426,326,248,False,G-Corp,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,2,Arbitrator,388,291,321,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,3,Arbitrator,383,296,321,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,4,Arbitrator,343,343,314,False,G-Corp,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,5,Arbitrator,322,386,292,False,G-Corp,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,6,Arbitrator,450,275,275,False,Yang Industries,False,,,
+arbitrator,gemini_flash,7,arbitrator__gemini_flash__run07,7,Arbitrator,450,300,250,True,,True,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,1,Arbitrator,406,328,266,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,2,Arbitrator,395,320,285,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,3,Arbitrator,380,315,305,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,4,Arbitrator,390,315,295,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,5,Arbitrator,385,315,300,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,6,Arbitrator,375,315,310,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,7,Arbitrator,370,320,310,False,G-Corp,False,,,
+arbitrator,gemini_flash,8,arbitrator__gemini_flash__run08,8,Arbitrator,380,315,305,False,G-Corp,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,1,Arbitrator,441,331,228,False,G-Corp,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,2,Arbitrator,426,314,260,False,G-Corp,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,3,Arbitrator,433,299,268,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,4,Arbitrator,428,324,248,False,G-Corp,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,5,Arbitrator,455,315,230,True,,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,6,Arbitrator,450,335,215,True,,False,,,
+arbitrator,gemini_flash,9,arbitrator__gemini_flash__run09,7,Arbitrator,450,320,230,True,,True,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,1,Arbitrator,413,333,254,False,G-Corp,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,2,Arbitrator,405,298,297,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,3,Arbitrator,416,292,292,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,4,Arbitrator,410,306,284,False,G-Corp,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,5,Arbitrator,454,273,273,False,Yang Industries,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,6,Arbitrator,382,316,302,False,G-Corp,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,7,Arbitrator,447,306,247,False,G-Corp,False,,,
+arbitrator,gemini_flash,10,arbitrator__gemini_flash__run10,8,Arbitrator,458,301,241,True,,True,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,1,Arbitrator,360,320,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,2,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,3,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,4,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,5,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,6,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,7,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,1,arbitrator__gemini_flash_lite__run01,8,Arbitrator,450,275,275,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,1,Arbitrator,350,350,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,2,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,3,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,4,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,5,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,6,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,7,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,2,arbitrator__gemini_flash_lite__run02,8,Arbitrator,340,340,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,3,arbitrator__gemini_flash_lite__run03,1,Arbitrator,450,380,170,True,,False,,,
+arbitrator,gemini_flash_lite,3,arbitrator__gemini_flash_lite__run03,2,Arbitrator,420,340,240,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,3,arbitrator__gemini_flash_lite__run03,3,Arbitrator,450,290,260,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,3,arbitrator__gemini_flash_lite__run03,4,Arbitrator,450,300,250,True,,True,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,1,Arbitrator,400,330,270,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,2,Arbitrator,450,330,220,True,,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,3,Arbitrator,480,300,220,True,,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,4,Arbitrator,450,330,220,True,,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,5,Arbitrator,430,330,240,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,6,Arbitrator,450,300,250,True,,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,7,Arbitrator,430,350,220,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,4,arbitrator__gemini_flash_lite__run04,8,Arbitrator,420,330,250,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,1,Arbitrator,400,350,250,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,2,Arbitrator,430,340,230,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,3,Arbitrator,450,350,200,True,,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,4,Arbitrator,450,330,220,True,,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,5,Arbitrator,430,330,240,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,6,Arbitrator,430,330,240,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,7,Arbitrator,450,330,220,True,,False,,,
+arbitrator,gemini_flash_lite,5,arbitrator__gemini_flash_lite__run05,8,Arbitrator,450,300,250,True,,True,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,1,Arbitrator,350,350,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,2,Arbitrator,350,350,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,3,Arbitrator,360,360,280,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,4,Arbitrator,370,370,260,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,5,Arbitrator,450,450,100,True,,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,6,Arbitrator,370,370,260,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,7,Arbitrator,400,400,200,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,6,arbitrator__gemini_flash_lite__run06,8,Arbitrator,400,400,200,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,1,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,2,Arbitrator,360,320,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,3,Arbitrator,400,300,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,4,Arbitrator,440,280,280,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,5,Arbitrator,480,260,260,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,6,Arbitrator,500,250,250,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,7,Arbitrator,500,250,250,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,7,arbitrator__gemini_flash_lite__run07,8,Arbitrator,500,250,250,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,1,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,2,Arbitrator,400,300,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,3,Arbitrator,450,300,250,True,,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,4,Arbitrator,420,300,280,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,5,Arbitrator,430,300,270,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,6,Arbitrator,450,300,250,True,,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,7,Arbitrator,440,310,250,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,8,arbitrator__gemini_flash_lite__run08,8,Arbitrator,450,330,220,True,,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,1,Arbitrator,334,333,333,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,2,Arbitrator,380,310,310,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,3,Arbitrator,380,310,310,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,4,Arbitrator,350,325,325,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,5,Arbitrator,350,325,325,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,6,Arbitrator,356,322,322,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,7,Arbitrator,360,320,320,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,9,arbitrator__gemini_flash_lite__run09,8,Arbitrator,360,320,320,False,G-Corp,True,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,1,Arbitrator,400,300,300,False,G-Corp,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,2,Arbitrator,430,280,290,False,G-Corp + Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,3,Arbitrator,450,250,300,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,4,Arbitrator,470,230,300,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,5,Arbitrator,500,200,300,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,6,Arbitrator,500,200,300,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,7,Arbitrator,480,220,300,False,Yang Industries,False,,,
+arbitrator,gemini_flash_lite,10,arbitrator__gemini_flash_lite__run10,8,Arbitrator,500,200,300,False,Yang Industries,False,,,
+free,claude,1,free__claude__run01,1,Yang Industries,320,480,200,False,G-Corp,,,,
+free,claude,1,free__claude__run01,1,G-Corp,480,320,200,True,,,,,
+free,claude,1,free__claude__run01,1,Chang-Liu Cloud Services,430,330,240,False,G-Corp,,,,
+free,claude,1,free__claude__run01,2,G-Corp,460,320,220,True,,,,,
+free,claude,1,free__claude__run01,2,Chang-Liu Cloud Services,450,330,220,True,,,,,
+free,claude,1,free__claude__run01,3,Yang Industries,440,350,210,False,G-Corp,,,,
+free,claude,1,free__claude__run01,3,G-Corp,455,335,210,True,,,,,
+free,gemini_flash,1,free__gemini_flash__run01,1,Yang Industries,420,350,230,False,G-Corp,,,,
+free,gemini_flash,1,free__gemini_flash__run01,1,G-Corp,480,280,240,False,Yang Industries,,,,
+free,gemini_flash,1,free__gemini_flash__run01,1,Chang-Liu Cloud Services,450,280,270,False,Yang Industries,,,,
+free,gemini_flash,1,free__gemini_flash__run01,2,Yang Industries,440,320,240,False,G-Corp,,,,
+free,gemini_flash,1,free__gemini_flash__run01,2,G-Corp,460,280,260,False,Yang Industries,,,,
+free,gemini_flash,1,free__gemini_flash__run01,2,Chang-Liu Cloud Services,450,300,250,True,,,,,
+free,gemini_flash,1,free__gemini_flash__run01,3,Yang Industries,450,310,240,True,,,,,
+free,gemini_flash,1,free__gemini_flash__run01,3,G-Corp,460,295,245,False,Yang Industries,,,,
+free,gemini_flash,1,free__gemini_flash__run01,3,Chang-Liu Cloud Services,455,300,245,True,,,,,
+free,gemini_flash,1,free__gemini_flash__run01,4,Yang Industries,455,305,240,True,,,,,
+free,gemini_flash,2,free__gemini_flash__run02,1,Yang Industries,370,360,270,False,G-Corp,,,,
+free,gemini_flash,2,free__gemini_flash__run02,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash,2,free__gemini_flash__run02,1,G-Corp,480,280,240,False,Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,2,Yang Industries,430,320,250,False,G-Corp,,,,
+free,gemini_flash,2,free__gemini_flash__run02,2,Chang-Liu Cloud Services,440,290,270,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,2,G-Corp,460,280,260,False,Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,3,Yang Industries,450,305,245,True,,,,,
+free,gemini_flash,2,free__gemini_flash__run02,3,Chang-Liu Cloud Services,450,285,265,False,Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,3,G-Corp,455,290,255,False,Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,4,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash,2,free__gemini_flash__run02,4,Chang-Liu Cloud Services,452,295,253,False,Yang Industries,,,,
+free,gemini_flash,2,free__gemini_flash__run02,4,G-Corp,452,300,248,True,,,,,
+free,gemini_flash,3,free__gemini_flash__run03,1,G-Corp,480,270,250,False,Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,1,Chang-Liu Cloud Services,410,300,290,False,G-Corp,,,,
+free,gemini_flash,3,free__gemini_flash__run03,1,Yang Industries,390,330,280,False,G-Corp,,,,
+free,gemini_flash,3,free__gemini_flash__run03,2,G-Corp,465,270,265,False,Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,2,Chang-Liu Cloud Services,430,295,275,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,2,Yang Industries,420,310,270,False,G-Corp,,,,
+free,gemini_flash,3,free__gemini_flash__run03,3,G-Corp,455,280,265,False,Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,3,Chang-Liu Cloud Services,440,290,270,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,3,Yang Industries,445,300,255,False,G-Corp,,,,
+free,gemini_flash,3,free__gemini_flash__run03,4,G-Corp,450,290,260,False,Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,4,Chang-Liu Cloud Services,450,285,265,False,Yang Industries,,,,
+free,gemini_flash,3,free__gemini_flash__run03,4,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,1,Chang-Liu Cloud Services,420,300,280,False,G-Corp,,,,
+free,gemini_flash,4,free__gemini_flash__run04,1,Yang Industries,410,340,250,False,G-Corp,,,,
+free,gemini_flash,4,free__gemini_flash__run04,1,G-Corp,470,310,220,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,2,Chang-Liu Cloud Services,440,310,250,False,G-Corp,,,,
+free,gemini_flash,4,free__gemini_flash__run04,2,Yang Industries,440,325,235,False,G-Corp,,,,
+free,gemini_flash,4,free__gemini_flash__run04,2,G-Corp,455,315,230,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,3,Chang-Liu Cloud Services,450,315,235,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,3,Yang Industries,450,322,228,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,3,G-Corp,452,320,228,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,4,Chang-Liu Cloud Services,451,319,230,True,,,,,
+free,gemini_flash,4,free__gemini_flash__run04,4,Yang Industries,452,320,228,True,,,,,
+free,gemini_flash,5,free__gemini_flash__run05,1,G-Corp,480,270,250,False,Yang Industries,,,,
+free,gemini_flash,5,free__gemini_flash__run05,1,Chang-Liu Cloud Services,380,320,300,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,1,Yang Industries,370,350,280,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,2,G-Corp,465,280,255,False,Yang Industries,,,,
+free,gemini_flash,5,free__gemini_flash__run05,2,Chang-Liu Cloud Services,400,315,285,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,2,Yang Industries,410,330,260,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,3,G-Corp,455,285,260,False,Yang Industries,,,,
+free,gemini_flash,5,free__gemini_flash__run05,3,Chang-Liu Cloud Services,430,300,270,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,3,Yang Industries,435,305,260,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,4,G-Corp,450,285,265,False,Yang Industries,,,,
+free,gemini_flash,5,free__gemini_flash__run05,4,Chang-Liu Cloud Services,445,295,260,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,5,free__gemini_flash__run05,4,Yang Industries,440,300,260,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,5,G-Corp,450,300,250,True,,,,,
+free,gemini_flash,5,free__gemini_flash__run05,5,Yang Industries,445,305,250,False,G-Corp,,,,
+free,gemini_flash,5,free__gemini_flash__run05,6,G-Corp,450,300,250,True,,,,,
+free,gemini_flash,5,free__gemini_flash__run05,6,Yang Industries,450,302,248,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,1,G-Corp,480,300,220,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,1,Yang Industries,400,360,240,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,1,Chang-Liu Cloud Services,380,330,290,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,2,G-Corp,460,310,230,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,2,Yang Industries,420,345,235,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,2,Chang-Liu Cloud Services,430,325,245,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,3,G-Corp,455,312,233,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,3,Yang Industries,440,325,235,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,3,Chang-Liu Cloud Services,445,317,238,False,G-Corp,,,,
+free,gemini_flash,6,free__gemini_flash__run06,4,G-Corp,450,315,235,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,4,Yang Industries,450,314,236,True,,,,,
+free,gemini_flash,6,free__gemini_flash__run06,5,G-Corp,452,313,235,True,,,,,
+free,gemini_flash,7,free__gemini_flash__run07,1,G-Corp,480,310,210,True,,,,,
+free,gemini_flash,7,free__gemini_flash__run07,1,Yang Industries,420,350,230,False,G-Corp,,,,
+free,gemini_flash,7,free__gemini_flash__run07,1,Chang-Liu Cloud Services,430,330,240,False,G-Corp,,,,
+free,gemini_flash,7,free__gemini_flash__run07,2,G-Corp,465,320,215,True,,,,,
+free,gemini_flash,7,free__gemini_flash__run07,2,Yang Industries,445,335,220,False,G-Corp,,,,
+free,gemini_flash,7,free__gemini_flash__run07,2,Chang-Liu Cloud Services,450,325,225,True,,,,,
+free,gemini_flash,7,free__gemini_flash__run07,3,G-Corp,455,325,220,True,,,,,
+free,gemini_flash,8,free__gemini_flash__run08,1,G-Corp,490,260,250,False,Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,1,Chang-Liu Cloud Services,430,285,285,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,1,Yang Industries,420,320,260,False,G-Corp,,,,
+free,gemini_flash,8,free__gemini_flash__run08,2,G-Corp,460,275,265,False,Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,2,Chang-Liu Cloud Services,450,275,275,False,Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,2,Yang Industries,440,295,265,False,G-Corp + Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,3,G-Corp,450,280,270,False,Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,3,Chang-Liu Cloud Services,450,285,265,False,Yang Industries,,,,
+free,gemini_flash,8,free__gemini_flash__run08,3,Yang Industries,450,295,255,False,Yang Industries,,,,
+free,gemini_flash,9,free__gemini_flash__run09,1,Chang-Liu Cloud Services,480,290,230,False,Yang Industries,,,,
+free,gemini_flash,9,free__gemini_flash__run09,1,G-Corp,500,280,220,False,Yang Industries,,,,
+free,gemini_flash,9,free__gemini_flash__run09,1,Yang Industries,460,330,210,True,,,,,
+free,gemini_flash,9,free__gemini_flash__run09,2,Chang-Liu Cloud Services,480,300,220,True,,,,,
+free,gemini_flash,9,free__gemini_flash__run09,2,G-Corp,485,305,210,True,,,,,
+free,gemini_flash,9,free__gemini_flash__run09,2,Yang Industries,475,315,210,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,1,G-Corp,480,290,230,False,Yang Industries,,,,
+free,gemini_flash,10,free__gemini_flash__run10,1,Chang-Liu Cloud Services,420,310,270,False,G-Corp,,,,
+free,gemini_flash,10,free__gemini_flash__run10,1,Yang Industries,425,330,245,False,G-Corp,,,,
+free,gemini_flash,10,free__gemini_flash__run10,2,G-Corp,465,305,230,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,2,Chang-Liu Cloud Services,445,305,250,False,G-Corp,,,,
+free,gemini_flash,10,free__gemini_flash__run10,2,Yang Industries,445,320,235,False,G-Corp,,,,
+free,gemini_flash,10,free__gemini_flash__run10,3,G-Corp,455,310,235,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,3,Chang-Liu Cloud Services,450,305,245,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,3,Yang Industries,450,310,240,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,4,G-Corp,454,307,239,True,,,,,
+free,gemini_flash,10,free__gemini_flash__run10,4,Chang-Liu Cloud Services,452,308,240,True,,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,1,Chang-Liu Cloud Services,450,350,200,True,,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,1,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,1,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,2,Yang Industries,450,320,230,True,,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,2,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,3,Yang Industries,440,310,250,False,G-Corp,,,,
+free,gemini_flash_lite,1,free__gemini_flash_lite__run01,3,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,1,G-Corp,500,300,200,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,1,Yang Industries,350,400,250,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,2,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,2,Chang-Liu Cloud Services,420,330,250,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,2,Yang Industries,400,400,200,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,3,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,3,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,3,Yang Industries,420,380,200,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,4,G-Corp,450,330,220,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,4,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,4,Yang Industries,430,370,200,False,G-Corp,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,5,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,5,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,5,Yang Industries,450,360,190,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,6,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,6,Chang-Liu Cloud Services,450,280,270,False,Yang Industries,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,6,Yang Industries,450,350,200,True,,,,,
+free,gemini_flash_lite,2,free__gemini_flash_lite__run02,7,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,1,Yang Industries,450,350,200,True,,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,1,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,2,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,2,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,3,Yang Industries,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,3,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,4,Yang Industries,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,4,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,5,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,5,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,6,Yang Industries,425,300,275,False,G-Corp,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,6,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,7,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,3,free__gemini_flash_lite__run03,7,G-Corp,450,200,350,False,Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,1,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,1,Yang Industries,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,2,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,2,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,2,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,3,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,3,Yang Industries,430,320,250,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,3,Chang-Liu Cloud Services,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,4,G-Corp,450,280,270,False,Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,4,Yang Industries,420,330,250,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,4,Chang-Liu Cloud Services,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,5,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,5,Yang Industries,430,300,270,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,5,Chang-Liu Cloud Services,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,6,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,6,Yang Industries,430,300,270,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,6,Chang-Liu Cloud Services,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,7,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,7,Yang Industries,430,300,270,False,G-Corp,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,7,Chang-Liu Cloud Services,440,260,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,4,free__gemini_flash_lite__run04,8,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,1,Chang-Liu Cloud Services,300,250,450,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,1,Yang Industries,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,1,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,2,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,2,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,3,Chang-Liu Cloud Services,425,275,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,3,Yang Industries,425,300,275,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,3,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,4,Chang-Liu Cloud Services,425,300,275,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,4,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,5,Chang-Liu Cloud Services,435,300,265,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,5,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,6,Chang-Liu Cloud Services,435,300,265,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,6,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,7,Chang-Liu Cloud Services,435,300,265,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,7,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,8,Chang-Liu Cloud Services,435,300,265,False,G-Corp,,,,
+free,gemini_flash_lite,5,free__gemini_flash_lite__run05,8,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,1,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,1,Chang-Liu Cloud Services,400,250,350,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,1,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,2,Yang Industries,430,300,270,False,G-Corp,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,2,Chang-Liu Cloud Services,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,2,G-Corp,450,280,270,False,Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,3,Yang Industries,440,300,260,False,G-Corp,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,3,Chang-Liu Cloud Services,440,280,280,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,3,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,4,Yang Industries,445,300,255,False,G-Corp,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,4,Chang-Liu Cloud Services,445,285,270,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,4,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,5,Yang Industries,450,290,260,False,Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,5,Chang-Liu Cloud Services,450,280,270,False,Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,5,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,6,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,6,Chang-Liu Cloud Services,445,290,265,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,6,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,7,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,7,Chang-Liu Cloud Services,445,290,265,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,7,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,6,free__gemini_flash_lite__run06,8,Yang Industries,450,300,250,True,,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,1,Yang Industries,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,1,Chang-Liu Cloud Services,350,300,350,False,G-Corp,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,1,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,2,Yang Industries,425,288,287,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,2,Chang-Liu Cloud Services,425,285,290,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,2,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,3,Yang Industries,425,300,275,False,G-Corp,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,3,Chang-Liu Cloud Services,425,287,288,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,3,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,4,Yang Industries,435,290,275,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,4,Chang-Liu Cloud Services,430,285,285,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,4,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,5,Yang Industries,440,280,280,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,5,Chang-Liu Cloud Services,438,281,281,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,5,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,6,Yang Industries,440,280,280,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,6,Chang-Liu Cloud Services,442,279,279,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,6,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,7,Yang Industries,445,278,277,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,7,Chang-Liu Cloud Services,445,277,278,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,7,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,8,Yang Industries,448,276,276,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,8,Chang-Liu Cloud Services,447,276,277,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,7,free__gemini_flash_lite__run07,8,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,1,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,1,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,2,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,2,Yang Industries,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,2,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,3,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,3,Yang Industries,420,280,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,3,Chang-Liu Cloud Services,420,280,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,4,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,4,Yang Industries,430,270,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,4,Chang-Liu Cloud Services,425,275,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,5,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,5,Yang Industries,435,265,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,5,Chang-Liu Cloud Services,435,265,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,6,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,6,Yang Industries,440,260,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,6,Chang-Liu Cloud Services,440,260,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,7,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,7,Yang Industries,445,255,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,7,Chang-Liu Cloud Services,445,255,300,False,G-Corp + Yang Industries,,,,
+free,gemini_flash_lite,8,free__gemini_flash_lite__run08,8,G-Corp,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,1,Yang Industries,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,1,Chang-Liu Cloud Services,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,1,G-Corp,450,300,250,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,2,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,2,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,2,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,3,Yang Industries,430,350,220,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,3,Chang-Liu Cloud Services,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,3,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,4,Yang Industries,440,350,210,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,4,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,4,G-Corp,450,330,220,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,5,Yang Industries,430,350,220,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,5,Chang-Liu Cloud Services,420,330,250,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,5,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,6,Yang Industries,430,350,220,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,6,Chang-Liu Cloud Services,420,330,250,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,6,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,7,Yang Industries,430,350,220,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,7,Chang-Liu Cloud Services,430,320,250,False,G-Corp,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,7,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,9,free__gemini_flash_lite__run09,8,Chang-Liu Cloud Services,450,350,200,True,,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,1,G-Corp,450,275,275,False,Yang Industries,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,1,Yang Industries,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,1,Chang-Liu Cloud Services,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,2,G-Corp,400,300,300,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,2,Yang Industries,350,350,300,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,3,G-Corp,420,350,230,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,3,Yang Industries,380,350,270,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,3,Chang-Liu Cloud Services,370,350,280,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,4,G-Corp,450,350,200,True,,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,4,Yang Industries,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,4,Chang-Liu Cloud Services,390,350,260,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,5,G-Corp,410,350,240,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,5,Yang Industries,395,350,255,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,5,Chang-Liu Cloud Services,390,350,260,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,6,G-Corp,400,350,250,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,6,Yang Industries,395,350,255,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,7,G-Corp,420,350,230,False,G-Corp,,,,
+free,gemini_flash_lite,10,free__gemini_flash_lite__run10,7,Yang Industries,395,350,255,False,G-Corp,,,,
+vote,claude,1,vote__claude__run01,1,Yang Industries,290,420,290,False,G-Corp,False,other option,for,other option
+vote,claude,1,vote__claude__run01,1,Chang-Liu Cloud Services,300,300,400,False,G-Corp,False,other option,other option,for
+vote,claude,1,vote__claude__run01,1,G-Corp,560,220,220,False,Yang Industries,False,for,other option,other option
+vote,claude,1,vote__claude__run01,2,Chang-Liu Cloud Services,325,325,350,False,G-Corp,True,other option,for,for
+vote,claude,1,vote__claude__run01,2,Yang Industries,300,400,300,False,G-Corp,False,other option,other option,other option
+vote,claude,1,vote__claude__run01,2,G-Corp,450,360,190,True,,False,for,other option,other option
+vote,gemini_flash,1,vote__gemini_flash__run01,1,Chang-Liu Cloud Services,340,320,340,False,G-Corp,False,none,other option,for
+vote,gemini_flash,1,vote__gemini_flash__run01,1,Yang Industries,290,400,310,False,G-Corp,False,none,for,other option
+vote,gemini_flash,1,vote__gemini_flash__run01,1,G-Corp,485,215,300,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash,1,vote__gemini_flash__run01,2,Yang Industries,290,375,335,False,G-Corp,True,other option,for,for
+vote,gemini_flash,1,vote__gemini_flash__run01,2,Chang-Liu Cloud Services,320,350,330,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,1,vote__gemini_flash__run01,2,G-Corp,460,195,345,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,2,vote__gemini_flash__run02,1,Chang-Liu Cloud Services,360,320,320,False,G-Corp,False,none,other option,for
+vote,gemini_flash,2,vote__gemini_flash__run02,1,Yang Industries,290,390,320,False,G-Corp,False,none,for,other option
+vote,gemini_flash,2,vote__gemini_flash__run02,1,G-Corp,470,280,250,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash,2,vote__gemini_flash__run02,2,G-Corp,460,210,330,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash,2,vote__gemini_flash__run02,2,Yang Industries + Chang-Liu Cloud Services,300,360,340,False,G-Corp,True,none,for,for
+vote,gemini_flash,3,vote__gemini_flash__run03,1,Chang-Liu Cloud Services,310,370,320,False,G-Corp,True,other option,for,for
+vote,gemini_flash,3,vote__gemini_flash__run03,1,G-Corp,470,250,280,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,3,vote__gemini_flash__run03,1,Yang Industries,320,370,310,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,4,vote__gemini_flash__run04,1,Yang Industries,340,390,270,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,4,vote__gemini_flash__run04,1,G-Corp,470,270,260,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,4,vote__gemini_flash__run04,1,Chang-Liu Cloud Services,380,330,290,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,4,vote__gemini_flash__run04,2,Chang-Liu Cloud Services,410,310,280,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,4,vote__gemini_flash__run04,2,G-Corp,460,255,285,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,4,vote__gemini_flash__run04,2,Yang Industries,340,360,300,False,G-Corp,True,other option,for,for
+vote,gemini_flash,5,vote__gemini_flash__run05,1,G-Corp,480,250,270,False,Yang Industries,False,for,other option,none
+vote,gemini_flash,5,vote__gemini_flash__run05,1,Yang Industries,320,390,290,False,G-Corp,False,other option,other option,none
+vote,gemini_flash,5,vote__gemini_flash__run05,1,Chang-Liu Cloud Services,380,360,260,False,G-Corp,False,other option,for,none
+vote,gemini_flash,5,vote__gemini_flash__run05,2,Yang Industries,380,340,280,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,5,vote__gemini_flash__run05,2,Chang-Liu Cloud Services,340,375,285,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,5,vote__gemini_flash__run05,2,G-Corp,470,250,280,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,5,vote__gemini_flash__run05,3,Chang-Liu Cloud Services,360,350,290,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,5,vote__gemini_flash__run05,3,Yang Industries,380,340,280,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,5,vote__gemini_flash__run05,3,G-Corp,450,255,295,False,Yang Industries,True,for,other option,for
+vote,gemini_flash,6,vote__gemini_flash__run06,1,G-Corp,480,280,240,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash,6,vote__gemini_flash__run06,1,Chang-Liu Cloud Services,320,380,300,False,G-Corp,False,none,for,other option
+vote,gemini_flash,6,vote__gemini_flash__run06,1,Yang Industries,310,380,310,False,G-Corp,False,none,other option,for
+vote,gemini_flash,6,vote__gemini_flash__run06,2,Yang Industries + Chang-Liu Cloud Services,310,380,310,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,6,vote__gemini_flash__run06,2,G-Corp,460,190,350,False,Yang Industries,True,for,other option,for
+vote,gemini_flash,7,vote__gemini_flash__run07,1,Yang Industries,330,360,310,False,G-Corp,True,other option,for,for
+vote,gemini_flash,7,vote__gemini_flash__run07,1,G-Corp,480,260,260,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,7,vote__gemini_flash__run07,1,Chang-Liu Cloud Services,370,340,290,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,8,vote__gemini_flash__run08,1,Chang-Liu Cloud Services,320,360,320,False,G-Corp,True,other option,for,for
+vote,gemini_flash,8,vote__gemini_flash__run08,1,G-Corp,500,260,240,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,8,vote__gemini_flash__run08,1,Yang Industries,340,350,310,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,1,Chang-Liu Cloud Services,240,410,350,False,G-Corp,False,other option,for,none
+vote,gemini_flash,9,vote__gemini_flash__run09,1,G-Corp,480,220,300,False,Yang Industries,False,for,other option,none
+vote,gemini_flash,9,vote__gemini_flash__run09,1,Yang Industries,300,380,320,False,G-Corp,False,other option,other option,none
+vote,gemini_flash,9,vote__gemini_flash__run09,2,Yang Industries,240,390,370,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,9,vote__gemini_flash__run09,2,G-Corp,460,220,320,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,2,Chang-Liu Cloud Services,230,410,360,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,3,Chang-Liu Cloud Services,235,400,365,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,3,Yang Industries,240,390,370,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,9,vote__gemini_flash__run09,3,G-Corp,450,170,380,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,4,Yang Industries,240,380,380,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,9,vote__gemini_flash__run09,4,G-Corp,450,160,390,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,4,Chang-Liu Cloud Services,230,400,370,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,5,Chang-Liu Cloud Services,230,400,370,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,5,G-Corp,450,150,400,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,5,Yang Industries,240,380,380,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,9,vote__gemini_flash__run09,6,G-Corp,450,140,410,False,Yang Industries,True,for,other option,for
+vote,gemini_flash,9,vote__gemini_flash__run09,6,Yang Industries,240,380,380,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,9,vote__gemini_flash__run09,6,Chang-Liu Cloud Services,230,400,370,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,10,vote__gemini_flash__run10,1,G-Corp,480,240,280,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash,10,vote__gemini_flash__run10,1,Yang Industries,280,400,320,False,G-Corp,False,other option,other option,for
+vote,gemini_flash,10,vote__gemini_flash__run10,1,Chang-Liu Cloud Services,260,400,340,False,G-Corp,False,other option,for,other option
+vote,gemini_flash,10,vote__gemini_flash__run10,2,Chang-Liu Cloud Services,260,400,340,False,G-Corp,True,other option,for,for
+vote,gemini_flash,10,vote__gemini_flash__run10,2,Yang Industries,270,400,330,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash,10,vote__gemini_flash__run10,2,G-Corp,460,180,360,False,Yang Industries,False,for,other option,other option
+vote,gemini_flash_lite,1,vote__gemini_flash_lite__run01,1,Yang Industries + Chang-Liu Cloud Services,300,350,350,False,G-Corp,True,none,for,for
+vote,gemini_flash_lite,1,vote__gemini_flash_lite__run01,1,G-Corp,480,260,260,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,False,none,none,none
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,1,G-Corp + Yang Industries,450,350,200,True,,False,none,none,none
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,2,Chang-Liu Cloud Services,450,300,250,True,,False,none,none,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,2,Yang Industries,400,300,300,False,G-Corp,False,none,none,for
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,2,G-Corp,450,350,200,True,,False,none,none,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,3,G-Corp,450,300,250,True,,False,none,other option,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,3,Yang Industries,400,350,250,False,G-Corp,False,none,for,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,3,Chang-Liu Cloud Services,400,300,300,False,G-Corp,False,none,other option,for
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,4,Yang Industries,400,350,250,False,G-Corp,False,other option,other option,other option
+vote,gemini_flash_lite,2,vote__gemini_flash_lite__run02,4,G-Corp + Chang-Liu Cloud Services,450,300,250,True,,True,for,for,for
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,1,G-Corp,500,250,250,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,1,Chang-Liu Cloud Services,350,300,350,False,G-Corp,False,none,other option,for
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,1,Yang Industries,300,350,350,False,G-Corp,False,none,for,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,2,G-Corp,450,275,275,False,Yang Industries,False,none,none,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,2,Yang Industries,350,350,300,False,G-Corp,False,none,none,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,2,Chang-Liu Cloud Services,400,250,350,False,G-Corp + Yang Industries,False,none,none,for
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,3,Chang-Liu Cloud Services,400,250,350,False,G-Corp + Yang Industries,False,none,none,none
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,3,G-Corp,450,275,275,False,Yang Industries,False,none,none,none
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,3,Yang Industries,400,350,250,False,G-Corp,False,none,none,none
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,4,Chang-Liu Cloud Services,400,250,350,False,G-Corp + Yang Industries,False,none,other option,for
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,4,G-Corp,450,275,275,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,4,Yang Industries,400,350,250,False,G-Corp,False,none,for,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,5,G-Corp,650,350,0,False,Chang-Liu Cloud Services,False,other option,other option,other option
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,5,Chang-Liu Cloud Services,450,200,350,False,Yang Industries,False,other option,other option,for
+vote,gemini_flash_lite,3,vote__gemini_flash_lite__run03,5,Yang Industries,450,350,200,True,,True,for,for,other option
+vote,gemini_flash_lite,4,vote__gemini_flash_lite__run04,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,True,none,for,for
+vote,gemini_flash_lite,4,vote__gemini_flash_lite__run04,1,G-Corp,500,275,225,False,Yang Industries,False,none,other option,other option
+vote,gemini_flash_lite,4,vote__gemini_flash_lite__run04,1,Yang Industries,400,350,250,False,G-Corp,False,none,other option,other option
+vote,gemini_flash_lite,5,vote__gemini_flash_lite__run05,1,Yang Industries,400,350,250,False,G-Corp,False,none,none,other option
+vote,gemini_flash_lite,5,vote__gemini_flash_lite__run05,1,G-Corp,460,270,270,False,Yang Industries,False,none,none,other option
+vote,gemini_flash_lite,5,vote__gemini_flash_lite__run05,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,False,none,none,for
+vote,gemini_flash_lite,5,vote__gemini_flash_lite__run05,2,G-Corp,450,275,275,False,Yang Industries,True,for,other option,for
+vote,gemini_flash_lite,5,vote__gemini_flash_lite__run05,2,Yang Industries + Chang-Liu Cloud Services,450,350,200,True,,False,other option,for,other option
+vote,gemini_flash_lite,6,vote__gemini_flash_lite__run06,1,Yang Industries,450,300,250,True,,False,none,none,other option
+vote,gemini_flash_lite,6,vote__gemini_flash_lite__run06,1,G-Corp,460,350,190,True,,False,none,none,other option
+vote,gemini_flash_lite,6,vote__gemini_flash_lite__run06,1,Chang-Liu Cloud Services,450,350,200,True,,False,none,none,for
+vote,gemini_flash_lite,6,vote__gemini_flash_lite__run06,2,G-Corp + Yang Industries + Chang-Liu Cloud Services,450,350,200,True,,True,for,for,for
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,1,Chang-Liu Cloud Services,400,300,300,False,G-Corp,False,none,other option,for
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,1,G-Corp,450,300,250,True,,False,none,other option,other option
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,1,Yang Industries,350,350,300,False,G-Corp,False,none,for,other option
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,2,Yang Industries,450,350,200,True,,False,other option,none,other option
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,2,Chang-Liu Cloud Services,450,250,300,False,Yang Industries,False,other option,none,for
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,2,G-Corp,450,300,250,True,,False,for,none,other option
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,3,Yang Industries,450,350,200,True,,True,for,for,for
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,3,G-Corp,450,275,275,False,Yang Industries,False,other option,other option,other option
+vote,gemini_flash_lite,7,vote__gemini_flash_lite__run07,3,Chang-Liu Cloud Services,450,300,250,True,,False,other option,other option,other option
+vote,gemini_flash_lite,8,vote__gemini_flash_lite__run08,1,G-Corp,450,350,200,True,,False,none,other option,other option
+vote,gemini_flash_lite,8,vote__gemini_flash_lite__run08,1,Yang Industries,300,350,350,False,G-Corp,True,none,for,for
+vote,gemini_flash_lite,8,vote__gemini_flash_lite__run08,1,Chang-Liu Cloud Services,300,300,400,False,G-Corp,False,none,other option,other option
+vote,gemini_flash_lite,9,vote__gemini_flash_lite__run09,1,Yang Industries + Chang-Liu Cloud Services,400,350,250,False,G-Corp,True,none,for,for
+vote,gemini_flash_lite,9,vote__gemini_flash_lite__run09,1,G-Corp,450,350,200,True,,False,none,other option,other option
+vote,gemini_flash_lite,10,vote__gemini_flash_lite__run10,1,Yang Industries,300,350,350,False,G-Corp,True,other option,for,for
+vote,gemini_flash_lite,10,vote__gemini_flash_lite__run10,1,Chang-Liu Cloud Services,450,350,200,True,,False,other option,other option,other option
+vote,gemini_flash_lite,10,vote__gemini_flash_lite__run10,1,G-Corp,450,275,275,False,Yang Industries,False,for,other option,other option
