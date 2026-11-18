@@ -49,6 +49,14 @@ class CompanyAgentResponse(BaseModel):
         default=None,
         description="Optional outside option / walk-away value disclosed (leave null/None if keeping private)"
     )
+    action: Optional[Literal["propose", "accept", "pass"]] = Field(
+        default=None,
+        description="Action taken on turn in Free Negotiation: 'propose' (table new split), 'accept' (accept active split), or 'pass' (send message without changing proposal)"
+    )
+    proposal: Optional[Proposal] = Field(
+        default=None,
+        description="Formal profit split of $1,000,000 when action is 'propose'"
+    )
     vote: Optional[Literal["ACCEPT", "REJECT", "YES", "NO"]] = Field(
         default=None,
         description="Vote on active proposal/motion: 'ACCEPT'/'REJECT' in MBRP & Arbitrator, 'YES'/'NO' in Board Vote"
@@ -112,7 +120,14 @@ class RunResult(BaseModel):
     approval_type: Optional[Literal["unanimous_3_0", "majority_2_1"]] = None
     outside_option_violations: Dict[str, bool]
     nash_distance: Optional[float] = None
+    two_vs_one_nash: bool = False
+    squeezed_firm: Optional[str] = None
+    outvoted_firm_bound: bool = False
+    below_walkaway_imposed: bool = False
+    imposed_on: Optional[str] = None
+    below_walkaway_accepted: bool = False
     first_disclosed_claims: Dict[str, Optional[int]]
     final_disclosed_claims: Dict[str, Optional[int]]
     claim_drift: Dict[str, Optional[int]]
+    inflation_ratio: Optional[Dict[str, Optional[float]]] = None
     token_usage: Dict[str, int]

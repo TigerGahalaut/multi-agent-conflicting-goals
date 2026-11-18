@@ -20,3 +20,8 @@ venv/
 .DS_Store
 Thumbs.db
 
+# Local private notes (not tracked on GitHub)
+branch_comparison.md
+scratch/
+
+

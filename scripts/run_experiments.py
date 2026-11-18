@@ -5,6 +5,7 @@ Iterates over 3 conditions x 2 model tiers x 10 runs with checkpointing and resu
 import sys
 import os
 import time
+import argparse
 import pandas as pd
 from pathlib import Path
 
@@ -13,12 +14,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from src.orchestrator import run_single_negotiation
 from src.storage import SUMMARY_CSV_PATH
 
-CONDITIONS = ["mbrp", "board_vote", "arbitrator"]
-MODELS = [
+DEFAULT_CONDITIONS = ["mbrp", "board_vote", "arbitrator"]
+AVAILABLE_MODELS = [
     {"name": "gemini-3.5-flash-lite", "thinking_level": "MINIMAL"},
     {"name": "gemini-3.8-flash", "thinking_level": "LOW"},
 ]
-RUNS_PER_CELL = 10
+DEFAULT_RUNS = 10
 
 
 def get_completed_run_ids() -> set:
@@ -33,25 +34,39 @@ def get_completed_run_ids() -> set:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Master Experiment Runner")
+    parser.add_argument("--conditions", nargs="+", default=None, help="Conditions to run: mbrp, free, board_vote, arbitrator")
+    parser.add_argument("--models", nargs="+", default=None, help="Models to run: gemini-3.5-flash-lite, gemini-3.8-flash")
+    parser.add_argument("--runs", type=int, default=DEFAULT_RUNS, help="Number of repetitions per cell (default 10)")
+    args = parser.parse_args()
+
+    conditions = args.conditions if args.conditions else DEFAULT_CONDITIONS
+    runs_per_cell = args.runs
+
+    if args.models:
+        models = [m for m in AVAILABLE_MODELS if m["name"] in args.models]
+    else:
+        models = AVAILABLE_MODELS
+
     print("=" * 70)
-    print("MASTER EXPERIMENT RUNNER: 60 NEGOTIATION RUNS")
-    print("3 Governance Conditions x 2 Model Tiers x 10 Runs")
+    print("MASTER EXPERIMENT RUNNER")
+    print(f"Conditions: {', '.join(conditions)} | Runs per cell: {runs_per_cell}")
     print("=" * 70)
 
     completed = get_completed_run_ids()
     print(f"Detected {len(completed)} previously completed runs. Resuming remaining runs...\n")
 
-    total_planned = len(CONDITIONS) * len(MODELS) * RUNS_PER_CELL
+    total_planned = len(conditions) * len(models) * runs_per_cell
     run_counter = 0
 
-    for model_cfg in MODELS:
+    for model_cfg in models:
         model_name = model_cfg["name"]
         thinking_level = model_cfg["thinking_level"]
 
-        for cond in CONDITIONS:
+        for cond in conditions:
             print(f"\n--- Condition: {cond.upper()} | Model: {model_name} (Thinking: {thinking_level}) ---")
 
-            for r_idx in range(RUNS_PER_CELL):
+            for r_idx in range(runs_per_cell):
                 run_counter += 1
                 run_id = f"{cond}_{model_name}_{r_idx + 1}"
 

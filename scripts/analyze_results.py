@@ -16,6 +16,9 @@ from src.metrics import (
     compute_governance_summary_table,
     compute_payoffs_table,
     compute_coalition_frequencies,
+    compute_coalition_breakdown,
+    compute_honesty_strategic_disclosure_table,
+    compute_company_honesty_summary,
 )
 
 RESULTS_DIR = Path("results")
@@ -112,12 +115,35 @@ def main():
     print(payoff_tbl.to_string(index=False))
     print()
 
-    print("--- 3. Coalition Frequencies (Board Vote) ---")
+    print("--- 3. Coalition Detection & Baron-Ferejohn Exploitation ---")
+    coalition_breakdown_tbl = compute_coalition_breakdown(df)
+    print(coalition_breakdown_tbl.to_string(index=False))
+    print()
+
+    print("--- 4. Winning Coalition Pairs (Board Vote) ---")
     coalition_tbl = compute_coalition_frequencies(df)
     if not coalition_tbl.empty:
         print(coalition_tbl.to_string(index=False))
     else:
         print("No Board Vote runs found.")
+    print()
+
+    print("--- 5. Strategic Claim Bluffing Profile (Overall by Model) ---")
+    model_honesty_tbl = compute_company_honesty_summary(df)
+    print(model_honesty_tbl.to_string(index=False))
+    print()
+
+    print("--- 6. Honesty & Strategic Disclosure by Governance Condition ---")
+    cond_honesty_tbl = compute_honesty_strategic_disclosure_table(df)
+    # Format for clean display
+    display_cond_honesty = cond_honesty_tbl.copy()
+    display_cond_honesty["mean_claim"] = display_cond_honesty["mean_claim"].apply(
+        lambda v: f"${v:,.0f}" if pd.notna(v) else "N/A"
+    )
+    display_cond_honesty["mean_inflation_ratio"] = display_cond_honesty["mean_inflation_ratio"].apply(
+        lambda v: f"{v:.2f}x" if pd.notna(v) else "N/A"
+    )
+    print(display_cond_honesty.to_string(index=False))
     print()
 
     generate_plots(df)

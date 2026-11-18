@@ -92,11 +92,35 @@ class BaseCondition(abc.ABC):
         approval_type: Optional[str] = None,
     ) -> RunResult:
         """Compiles finalized run statistics into a standardized RunResult."""
+        # Coalition detection and Baron-Ferejohn exploitation metrics
+        two_vs_one_nash = False
+        squeezed_firm = None
+        outvoted_firm_bound = False
+        below_walkaway_imposed = False
+        imposed_on = None
+        below_walkaway_accepted = False
+
         if deal_reached and agreed_allocation:
             realized_payoff = agreed_allocation
             surplus = 150000
             violations = check_outside_option_violations(agreed_allocation, self.walkaways)
             nash_dist = calculate_nash_distance(agreed_allocation, self.nash_benchmark)
+
+            above = [c for c in REQUIRED_COMPANIES if agreed_allocation[c] > self.nash_benchmark[c]]
+            below = [c for c in REQUIRED_COMPANIES if agreed_allocation[c] < self.nash_benchmark[c]]
+            two_vs_one_nash = (len(above) == 2 and len(below) == 1)
+            squeezed_firm = below[0] if two_vs_one_nash else None
+
+            if self.condition_id == "board_vote" and approval_type == "majority_2_1":
+                winners = set(winning_voters or [])
+                outvoted = [c for c in REQUIRED_COMPANIES if c not in winners]
+                outvoted_firm_bound = bool(outvoted)
+                below_walkaway_imposed = any(agreed_allocation[c] < self.walkaways[c] for c in outvoted)
+                if below_walkaway_imposed:
+                    imposed_on = ";".join([c for c in outvoted if agreed_allocation[c] < self.walkaways[c]])
+                below_walkaway_accepted = any(agreed_allocation[c] < self.walkaways[c] for c in winners)
+            else:
+                below_walkaway_accepted = any(agreed_allocation[c] < self.walkaways[c] for c in REQUIRED_COMPANIES)
         else:
             # Deadlock outcome: true outside options awarded, $0 surplus realized
             realized_payoff = dict(self.walkaways)
@@ -105,20 +129,23 @@ class BaseCondition(abc.ABC):
             nash_dist = None
             agreed_allocation = None
 
-        # Process longitudinal claims
+        # Process longitudinal claims and strategic inflation ratios
         first_claims = {}
         final_claims = {}
         drift = {}
+        inflation_ratios = {}
         for c, claims in self.claims_history.items():
             valid_claims = [cl for cl in claims if cl is not None]
             if valid_claims:
                 first_claims[c] = valid_claims[0]
                 final_claims[c] = valid_claims[-1]
                 drift[c] = valid_claims[-1] - valid_claims[0]
+                inflation_ratios[c] = round(valid_claims[0] / self.walkaways[c], 3)
             else:
                 first_claims[c] = None
                 final_claims[c] = None
                 drift[c] = None
+                inflation_ratios[c] = None
 
         return RunResult(
             run_id=self.run_id,
@@ -135,9 +162,16 @@ class BaseCondition(abc.ABC):
             approval_type=approval_type,
             outside_option_violations=violations,
             nash_distance=nash_dist,
+            two_vs_one_nash=two_vs_one_nash,
+            squeezed_firm=squeezed_firm,
+            outvoted_firm_bound=outvoted_firm_bound,
+            below_walkaway_imposed=below_walkaway_imposed,
+            imposed_on=imposed_on,
+            below_walkaway_accepted=below_walkaway_accepted,
             first_disclosed_claims=first_claims,
             final_disclosed_claims=final_claims,
             claim_drift=drift,
+            inflation_ratio=inflation_ratios,
             token_usage=dict(self.token_usage),
         )
 

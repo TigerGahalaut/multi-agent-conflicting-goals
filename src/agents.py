@@ -44,6 +44,8 @@ class NegotiationAgent:
             "- reasoning: Private strategic considerations (not revealed to other companies).\n"
             "- public_message: Statements communicated to the other negotiators.\n"
             "- claimed_walkaway: An integer dollar value if you disclose an outside option, or null if you keep it private.\n"
+            "- action: 'propose', 'accept', or 'pass' (in Free Negotiation).\n"
+            "- proposal: Formal profit split of $1,000,000 when action is 'propose'.\n"
             "- vote: 'ACCEPT' or 'REJECT' (in MBRP/Arbitrator) or 'YES'/'NO' (in Board Vote).\n"
             "- counter_proposal: Optional non-binding allocation suggestion for future rounds."
         )

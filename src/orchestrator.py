@@ -4,6 +4,7 @@ from typing import Dict, Optional
 from src.agents import NegotiationAgent, ArbitratorAgent
 from src.schemas import RunResult
 from src.conditions.mbrp import MBRPNegotiation
+from src.conditions.free_negotiation import FreeNegotiation
 from src.conditions.board_vote import BoardVoteNegotiation
 from src.conditions.arbitrator import ArbitratorNegotiation
 from src.storage import save_transcript, append_summary_csv
@@ -58,6 +59,15 @@ def run_single_negotiation(
             thinking_level=thinking_level,
             max_rounds=max_rounds,
         )
+    elif condition_id in ("free", "free_negotiation"):
+        condition = FreeNegotiation(
+            run_id=run_id,
+            run_index=run_index,
+            agents=agents,
+            model_name=model_name,
+            thinking_level=thinking_level,
+            max_rounds=max_rounds,
+        )
     elif condition_id == "board_vote":
         condition = BoardVoteNegotiation(
             run_id=run_id,
@@ -80,7 +90,7 @@ def run_single_negotiation(
             max_rounds=max_rounds,
         )
     else:
-        raise ValueError(f"Unknown condition_id: '{condition_id}'. Must be 'mbrp', 'board_vote', or 'arbitrator'.")
+        raise ValueError(f"Unknown condition_id: '{condition_id}'. Must be 'mbrp', 'free', 'board_vote', or 'arbitrator'.")
 
     # Run the simulation
     result = condition.execute()

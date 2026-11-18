@@ -6,6 +6,7 @@ from unittest.mock import MagicMock
 
 from src.schemas import CompanyAgentResponse, ArbitratorResponse, Proposal
 from src.conditions.mbrp import MBRPNegotiation
+from src.conditions.free_negotiation import FreeNegotiation
 from src.conditions.board_vote import BoardVoteNegotiation
 from src.conditions.arbitrator import ArbitratorNegotiation
 from src.validators import REQUIRED_COMPANIES
@@ -202,3 +203,71 @@ def test_arbitrator_reject_then_accept():
     # Verify confidential claim inflation logged
     assert res.first_disclosed_claims["Chang-Liu Cloud Services"] == 200000
     assert res.first_disclosed_claims["G-Corp"] == 500000
+
+
+# -----------------------------------------------------------------------------
+# Free Negotiation (Behavioral Conversational Simulation) Tests
+# -----------------------------------------------------------------------------
+
+def test_free_negotiation_immediate_agreement():
+    """Tests Free Negotiation when firm 1 proposes and both other firms accept."""
+    split = Proposal(allocations={"G-Corp": 500000, "Yang Industries": 350000, "Chang-Liu Cloud Services": 150000})
+
+    g_corp = create_mock_company_agent("G-Corp", 450000, [
+        CompanyAgentResponse(reasoning="p", public_message="I propose fair split", action="propose", proposal=split, claimed_walkaway=450000)
+    ])
+    yang = create_mock_company_agent("Yang Industries", 300000, [
+        CompanyAgentResponse(reasoning="a", public_message="I accept the offer", action="accept", claimed_walkaway=300000)
+    ])
+    chang_liu = create_mock_company_agent("Chang-Liu Cloud Services", 100000, [
+        CompanyAgentResponse(reasoning="a", public_message="I also accept", action="accept", claimed_walkaway=100000)
+    ])
+
+    agents = {"G-Corp": g_corp, "Yang Industries": yang, "Chang-Liu Cloud Services": chang_liu}
+    sim = FreeNegotiation(run_id="mock_free_deal", run_index=0, agents=agents, model_name="mock-model", thinking_level="MINIMAL")
+    res = sim.execute()
+
+    assert res.deal_reached is True
+    assert res.rounds_taken == 1
+    assert res.agreed_allocation == split.allocations
+    assert res.approval_type == "unanimous_3_0"
+    assert set(res.winning_voters) == {"G-Corp", "Yang Industries", "Chang-Liu Cloud Services"}
+    assert res.surplus_realized == 150000
+
+
+def test_free_negotiation_proposal_overwrite_clears_acceptances():
+    """Tests that a new proposal resets the accepted_firms set and requires new acceptances."""
+    prop1 = Proposal(allocations={"G-Corp": 600000, "Yang Industries": 300000, "Chang-Liu Cloud Services": 100000})
+    prop2 = Proposal(allocations={"G-Corp": 500000, "Yang Industries": 350000, "Chang-Liu Cloud Services": 150000})
+
+    # Sequence of turns:
+    # Round 1:
+    # Firm A proposes prop1 (Firm A accepts)
+    # Firm B passes or accepts prop1
+    # Firm C rejects prop1 by proposing prop2 (resets acceptances to {Firm C})
+    # Round 2:
+    # Everyone accepts prop2 -> Deal reached in Round 2
+    def mock_resp(action, msg, prop=None):
+        return CompanyAgentResponse(reasoning="r", public_message=msg, action=action, proposal=prop)
+
+    g_corp = create_mock_company_agent("G-Corp", 450000, [
+        mock_resp("propose", "I propose prop1", prop1),
+        mock_resp("accept", "I accept prop2 after review"),
+    ])
+    yang = create_mock_company_agent("Yang Industries", 300000, [
+        mock_resp("accept", "I accept prop1"),
+        mock_resp("accept", "I also accept prop2"),
+    ])
+    chang_liu = create_mock_company_agent("Chang-Liu Cloud Services", 100000, [
+        mock_resp("propose", "Prop1 is unfair to me, I counter with prop2", prop2),
+        mock_resp("accept", "I still accept my prop2"),
+    ])
+
+    agents = {"G-Corp": g_corp, "Yang Industries": yang, "Chang-Liu Cloud Services": chang_liu}
+    sim = FreeNegotiation(run_id="mock_free_overwrite", run_index=0, agents=agents, model_name="mock-model", thinking_level="MINIMAL")
+    res = sim.execute()
+
+    assert res.deal_reached is True
+    # The deal was reached on prop2
+    assert res.agreed_allocation == prop2.allocations
+
