@@ -39,6 +39,15 @@ models:
     model: gpt-4o
     temperature: null
     max_tokens: 16000
+  # Local open-weights model served by Ollama through its OpenAI-compatible API (no API key, no cost).
+  # Run it on its own, with the OpenAI client pointed at Ollama:
+  #   OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_API_KEY=ollama python run_experiment.py --models gpt_oss
+  # Do not run it together with `gpt` in one command: OPENAI_BASE_URL would send `gpt` to Ollama too.
+  gpt_oss:
+    provider: openai
+    model: gpt-oss:20b
+    temperature: null
+    max_tokens: 16000
 
 # Maximum attempts per call when the reply is not valid JSON or breaks a rule.
 max_parse_attempts: 3

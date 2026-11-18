@@ -77,7 +77,7 @@ Check the model IDs in `config.yaml` against each provider's current model list 
 .venv/bin/python run_experiment.py --models claude --runs 1
 
 # Full grid: 3 conditions x 2 models x 10 runs = 60 games
-.venv/bin/python run_experiment.py
+.venv/bin/python run_experiment.py --models claude gpt
 
 # Results tables
 .venv/bin/python metrics.py
@@ -85,6 +85,36 @@ Check the model IDs in `config.yaml` against each provider's current model list 
 
 Finished games are skipped on rerun, so an interrupted run can simply be restarted.
 Use `--overwrite` to rerun them.
+
+## Running locally with Ollama (no API keys)
+
+The `gpt_oss` entry in `config.yaml` runs the open-weights `gpt-oss:20b` on your own machine
+through Ollama's OpenAI-compatible API. Logs in
+`results/logs/1118_ollama_gpt_oss_result/`). 
+
+**Set up** (once):
+
+```bash
+brew install ollama          # macOS; for other systems see https://ollama.com/download
+OLLAMA_CONTEXT_LENGTH=16384 ollama serve   # start the server with a 16K context
+                             # (the default 4K context cuts off the game prompts)
+ollama pull gpt-oss:20b      # download the model (~13 GB)
+ollama list                  # check it is there
+```
+
+**Run** (point the OpenAI client at Ollama; any non-empty key works):
+
+```bash
+export OPENAI_BASE_URL=http://localhost:11434/v1
+export OPENAI_API_KEY=ollama
+
+.venv/bin/python run_experiment.py --models gpt_oss --conditions free --runs 1   # one test game
+.venv/bin/python run_experiment.py --models gpt_oss                              # 3 conditions x 10 runs
+```
+
+Always pass `--models gpt_oss` on its own: while `OPENAI_BASE_URL` is set, the `gpt` entry would
+also be sent to Ollama. To try another local model, `ollama pull` it and add an entry like
+`gpt_oss` with its name in `config.yaml`.
 
 ## Outputs
 
