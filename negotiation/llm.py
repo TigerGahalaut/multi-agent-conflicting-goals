@@ -19,9 +19,12 @@ class AnthropicClient:
     """Current Claude models take no sampling parameters (temperature etc.); depth is set with effort."""
 
     def __init__(self, model: str, max_tokens: int, effort: str | None = None):
+        import os
         import anthropic
 
-        self.client = anthropic.Anthropic(max_retries=5)
+        # A per-request timeout (seconds) so a stalled connection is retried instead of blocking for the
+        # SDK default of 10 minutes per attempt.
+        self.client = anthropic.Anthropic(max_retries=5, timeout=float(os.environ.get("ANTHROPIC_TIMEOUT", "120")))
         self.model = model
         self.max_tokens = max_tokens
         self.effort = effort
@@ -78,9 +81,23 @@ class GeminiClient:
 
     def __init__(self, model: str, max_tokens: int = 8192, thinking_level: str | None = None,
                  project: str = "ai-gov-514900", location: str = "global", max_retries: int = 5):
+        import os
         from google import genai
+        from google.genai import types
 
-        self.client = genai.Client(vertexai=True, project=project, location=location)
+        # A per-request timeout (ms) so a stalled request raises and the retry loop below can recover.
+        http = types.HttpOptions(timeout=int(os.environ.get("GEMINI_TIMEOUT_MS", "120000")))
+        # Credentials, first match wins: a Vertex AI express-mode key, a Gemini API (AI Studio) key,
+        # else Vertex AI with Application Default Credentials (GOOGLE_CLOUD_PROJECT overrides the project).
+        vertex_key = os.environ.get("VERTEX_API_KEY")
+        studio_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if vertex_key:
+            self.client = genai.Client(vertexai=True, api_key=vertex_key, http_options=http)
+        elif studio_key:
+            self.client = genai.Client(api_key=studio_key, http_options=http)
+        else:
+            self.client = genai.Client(vertexai=True, project=os.environ.get("GOOGLE_CLOUD_PROJECT", project),
+                                       location=location, http_options=http)
         self.model = model
         self.max_tokens = max_tokens
         self.thinking_level = thinking_level
@@ -98,8 +115,19 @@ class GeminiClient:
         if self.thinking_level:
             config_kwargs["thinking_config"] = types.ThinkingConfig(thinking_level=self.thinking_level)
 
+        import os
+        import re
+
+        # Optional client-side pacing (seconds between calls), e.g. GEMINI_MIN_INTERVAL=4.2 keeps one process
+        # under a 15 requests-per-minute free-tier quota.
+        min_gap = float(os.environ.get("GEMINI_MIN_INTERVAL", "0"))
         last_exc = None
-        for attempt in range(self.max_retries + 1):
+        attempts = max(self.max_retries, int(os.environ.get("GEMINI_MAX_RETRIES", "0")))
+        for attempt in range(attempts + 1):
+            wait = getattr(self, "_last_call", 0) + min_gap - time.time()
+            if wait > 0:
+                time.sleep(wait)
+            self._last_call = time.time()
             try:
                 resp = self.client.models.generate_content(
                     model=self.model,
@@ -121,9 +149,13 @@ class GeminiClient:
                 )
             except Exception as e:
                 last_exc = e
-                if attempt < self.max_retries:
-                    delay = 3.0 * (2 ** attempt)  # 3s, 6s, 12s, 24s, 48s
-                    print(f"\n[GeminiClient] Rate limit or transient error ({e}). Retrying in {delay:.1f}s (attempt {attempt + 1}/{self.max_retries})...", flush=True)
+                if attempt < attempts:
+                    delay = min(3.0 * (2 ** attempt), 60.0)  # 3s, 6s, 12s, 24s, 48s, then 60s
+                    hinted = re.search(r"retry in ([0-9.]+)s", str(e))  # 429s say how long to wait
+                    if hinted:
+                        delay = max(delay, float(hinted.group(1)) + 1.0)
+                    print(f"\n[GeminiClient] {str(e)[:120]} ... retrying in {delay:.0f}s "
+                          f"(attempt {attempt + 1}/{attempts})", flush=True)
                     time.sleep(delay)
 
         raise last_exc

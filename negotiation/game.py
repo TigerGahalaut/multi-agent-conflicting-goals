@@ -52,11 +52,14 @@ def as_int(x, field: str, allow_null: bool = False):
 
 class Game:
     def __init__(self, cfg: dict, condition: str, model_key: str, run: int, client, log_path: Path, seed: int,
-                 echo: bool = False):
+                 echo: bool = False, clients: dict | None = None, agent_model_keys: dict | None = None):
         if condition not in CONDITIONS:
             raise ValueError(f"unknown condition {condition}")
         self.cfg, self.condition, self.model_key = cfg, condition, model_key
         self.run, self.client, self.seed = run, client, seed
+        # Cross-model games: agent name -> client. Agents not listed use `client`.
+        self.clients = clients or {}
+        self.agent_model_keys = agent_model_keys or {}
         self.total, self.max_rounds = cfg["total_profit"], cfg["max_rounds"]
         self.rng = random.Random(seed)
         self.firms = [dict(c) for c in cfg["companies"]]
@@ -73,6 +76,9 @@ class Game:
         self.log_file = None
         self.n_options = 0  # number of vote options in the current round, for validation
         self.echo = echo  # also print the conversation to the terminal
+
+    def client_for(self, agent: str):
+        return self.clients.get(agent, self.client)
 
     # ---------- logging ----------
     def log(self, kind: str, **data):
@@ -145,7 +151,7 @@ class Game:
         for attempt in range(1, self.cfg.get("max_parse_attempts", 3) + 1):
             prompt = user if error is None else (
                 f"{user}\n\nYour previous reply was invalid: {error}. Reply again with a valid JSON object.")
-            resp = self.client.complete(self.systems[agent], prompt, step=step, meta=meta)
+            resp = self.client_for(agent).complete(self.systems[agent], prompt, step=step, meta=meta)
             try:
                 parsed = self.validate(step, extract_json(resp.text))
                 error = None
@@ -336,7 +342,9 @@ class Game:
         with open(self.log_path, "w", encoding="utf-8") as self.log_file:
             self.log("config", condition=self.condition, model_key=self.model_key, run=self.run,
                      seed=self.seed, firms=self.firms, total=self.total,
-                     max_rounds=self.max_rounds, model=getattr(self.client, "model", ""))
+                     max_rounds=self.max_rounds, model=getattr(self.client, "model", ""),
+                     agent_model_keys=self.agent_model_keys,
+                     agent_models={n: getattr(self.client_for(n), "model", "") for n in self.names + [ARBITRATOR]})
             if self.echo:
                 self.show(f"\n===== {self.condition} | {self.model_key} | run {self.run} =====")
             self.comprehension()
