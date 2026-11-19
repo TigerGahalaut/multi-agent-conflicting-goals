@@ -222,32 +222,46 @@ final_project/
 
 ## 8. Replication & Usage
 
-### 1. Environment Setup
+### 1. Environment & Dependencies Setup
 ```powershell
 conda activate ai-gov
 pip install -r requirements.txt
+pip install anthropic openai
 ```
 
-### 2. GCP Authentication
+### 2. Configure API Keys (.env)
+Copy the template to create your local `.env` file (which is protected by `.gitignore`):
 ```powershell
-gcloud auth application-default login
-gcloud auth application-default set-quota-project ai-gov-514900
+cp .env.example .env
+```
+Open `.env` and fill in whichever credentials you have:
+- **Google Gemini:** Set `GEMINI_API_KEY=...` (from [Google AI Studio](https://aistudio.google.com)) **OR** set `GOOGLE_CLOUD_PROJECT=...` (for Vertex AI with ADC).
+- **Anthropic Claude:** Set `ANTHROPIC_API_KEY=...` (for `claude-haiku-5-5`).
+- **OpenAI / Ollama:** Set `OPENAI_API_KEY=...` (for `gpt-4o`) or leave unset if running local open-weights Ollama.
+
+### 3. Verify Provider Connections
+Verify that your configured providers are reachable and returning valid structured output:
+```powershell
+python scripts/test_providers.py
 ```
 
-### 3. Run Unit Tests (Zero API Cost)
+### 4. Run Unit Tests (Zero API Cost)
 ```powershell
 pytest tests/
 ```
 
-### 4. Run Analysis & Generate Figures
+### 5. Running Experiments
 ```powershell
-python scripts/analyze_results.py
+# A. Run a Mixed-Model Game (e.g. G-Corp=Claude, Yang=GPT-4o, Chang-Liu=Gemini):
+python scripts/run_mixed_model.py --condition board_vote --runs 1
+
+# B. Run Homogeneous Experiment Grid:
+python scripts/run_experiments.py --conditions free arbitrator --models gemini-3.8-flash --runs 5
 ```
 
-### 5. Running Experiments (Optional)
+### 6. Run Analysis & Generate Figures
 ```powershell
-# Run specific condition(s) and model(s)
-python scripts/run_experiments.py --conditions free arbitrator --models gemini-3.8-flash --runs 5
+python scripts/analyze_results.py
 ```
 
 ---

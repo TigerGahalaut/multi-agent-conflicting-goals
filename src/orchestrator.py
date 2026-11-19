@@ -1,6 +1,8 @@
-"""Experiment orchestrator: initializes agents, executes negotiation runs, and logs outcomes."""
+"""Experiment orchestrator: initializes agents, executes negotiation runs, and logs outcomes.
+Supports both homogeneous runs and heterogeneous mixed-model allocations.
+"""
 
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 from src.agents import NegotiationAgent, ArbitratorAgent
 from src.schemas import RunResult
 from src.conditions.mbrp import MBRPNegotiation
@@ -19,35 +21,75 @@ COMPANIES_CONFIG = [
 def run_single_negotiation(
     run_id: str,
     condition_id: str,
-    model_name: str,
-    thinking_level: str,
+    model_name: str = "gemini-3.5-flash-lite",
+    thinking_level: str = "MINIMAL",
+    provider: str = "gemini",
+    temperature: Optional[float] = None,
     run_index: int = 0,
     max_rounds: int = 8,
+    agent_configs: Optional[Dict[str, Dict[str, Any]]] = None,
+    arbitrator_config: Optional[Dict[str, Any]] = None,
 ) -> RunResult:
     """
     Executes a single negotiation simulation end-to-end.
     
     Args:
         run_id: Unique identifier for this run.
-        condition_id: One of 'mbrp', 'board_vote', 'arbitrator'.
-        model_name: e.g. 'gemini-3.5-flash-lite' or 'gemini-3.8-flash'.
-        thinking_level: 'MINIMAL' or 'LOW'.
+        condition_id: One of 'mbrp', 'free', 'board_vote', 'arbitrator'.
+        model_name: Default model identifier (e.g. 'gemini-3.5-flash-lite', 'gpt-4o', 'claude-haiku-5-5').
+        thinking_level: 'MINIMAL', 'LOW', 'MEDIUM', 'HIGH' (for reasoning models).
+        provider: 'gemini', 'openai', or 'anthropic'.
+        temperature: Sampling temperature (for models that support it).
         run_index: 0-indexed repetition counter (used for proposer balancing).
         max_rounds: Maximum negotiation rounds (default 8).
+        agent_configs: Optional dictionary assigning specific models/providers per company:
+            {
+                "G-Corp": {"provider": "anthropic", "model_name": "claude-haiku-5-5"},
+                "Yang Industries": {"provider": "openai", "model_name": "gpt-4o"},
+                "Chang-Liu Cloud Services": {"provider": "gemini", "model_name": "gemini-3.8-flash"}
+            }
+        arbitrator_config: Optional specific provider/model config for the neutral arbitrator.
 
     Returns:
         Finalized RunResult instance.
     """
-    # Initialize company agents
+    # Initialize company agents (either from agent_configs or default model_name)
     agents: Dict[str, NegotiationAgent] = {}
     for cfg in COMPANIES_CONFIG:
-        agents[cfg["name"]] = NegotiationAgent(
-            company_name=cfg["name"],
+        c_name = cfg["name"]
+        if agent_configs and c_name in agent_configs:
+            c_cfg = agent_configs[c_name]
+            c_provider = c_cfg.get("provider", provider)
+            c_model = c_cfg.get("model_name", model_name)
+            c_think = c_cfg.get("thinking_level", thinking_level)
+            c_temp = c_cfg.get("temperature", temperature)
+            c_base = c_cfg.get("base_url")
+            c_key = c_cfg.get("api_key")
+        else:
+            c_provider = provider
+            c_model = model_name
+            c_think = thinking_level
+            c_temp = temperature
+            c_base = None
+            c_key = None
+
+        agents[c_name] = NegotiationAgent(
+            company_name=c_name,
             role=cfg["role"],
             walkaway=cfg["walkaway"],
-            model_name=model_name,
-            thinking_level=thinking_level,
+            model_name=c_model,
+            thinking_level=c_think,
+            provider=c_provider,
+            temperature=c_temp,
+            base_url=c_base,
+            api_key=c_key,
         )
+
+    # Effective tag for model reporting in metadata
+    if agent_configs:
+        effective_model_tag = "mixed_" + "-".join(f"{k[:3]}:{v.get('model_name','')[:7]}" for k, v in sorted(agent_configs.items()))
+    else:
+        effective_model_tag = model_name
 
     # Initialize and execute condition
     if condition_id == "mbrp":
@@ -55,7 +97,7 @@ def run_single_negotiation(
             run_id=run_id,
             run_index=run_index,
             agents=agents,
-            model_name=model_name,
+            model_name=effective_model_tag,
             thinking_level=thinking_level,
             max_rounds=max_rounds,
         )
@@ -64,7 +106,7 @@ def run_single_negotiation(
             run_id=run_id,
             run_index=run_index,
             agents=agents,
-            model_name=model_name,
+            model_name=effective_model_tag,
             thinking_level=thinking_level,
             max_rounds=max_rounds,
         )
@@ -72,20 +114,25 @@ def run_single_negotiation(
         condition = BoardVoteNegotiation(
             run_id=run_id,
             agents=agents,
-            model_name=model_name,
+            model_name=effective_model_tag,
             thinking_level=thinking_level,
             max_rounds=max_rounds,
         )
     elif condition_id == "arbitrator":
+        arb_cfg = arbitrator_config or {}
         arbitrator = ArbitratorAgent(
-            model_name=model_name,
-            thinking_level=thinking_level,
+            model_name=arb_cfg.get("model_name", model_name),
+            thinking_level=arb_cfg.get("thinking_level", thinking_level),
+            provider=arb_cfg.get("provider", provider),
+            temperature=arb_cfg.get("temperature", temperature),
+            base_url=arb_cfg.get("base_url"),
+            api_key=arb_cfg.get("api_key"),
         )
         condition = ArbitratorNegotiation(
             run_id=run_id,
             agents=agents,
             arbitrator=arbitrator,
-            model_name=model_name,
+            model_name=effective_model_tag,
             thinking_level=thinking_level,
             max_rounds=max_rounds,
         )
@@ -96,7 +143,7 @@ def run_single_negotiation(
     result = condition.execute()
 
     # Save transcript and summary
-    save_transcript(condition.events, run_id, condition_id, model_name)
+    save_transcript(condition.events, run_id, condition_id, effective_model_tag)
     append_summary_csv(result)
 
     return result

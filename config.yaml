@@ -34,13 +34,39 @@ economics:
 
 models:
   tier_a:
+    provider: "gemini"
     name: "gemini-3.5-flash-lite"
     thinking_level: "MINIMAL"
     description: "High-efficiency baseline model"
   tier_b:
+    provider: "gemini"
     name: "gemini-3.8-flash"
     thinking_level: "LOW"
     description: "Frontier reasoning model"
+  gemini_flash_lite:
+    provider: "gemini"
+    name: "gemini-3.5-flash-lite"
+    thinking_level: "MINIMAL"
+  gemini_flash:
+    provider: "gemini"
+    name: "gemini-3.8-flash"
+    thinking_level: "LOW"
+  claude:
+    provider: "anthropic"
+    name: "claude-haiku-5-5"
+    max_tokens: 2048
+  gpt:
+    provider: "openai"
+    name: "gpt-4o"
+    temperature: 0.7
+    max_tokens: 2048
+  gpt_oss:
+    provider: "openai"
+    name: "gpt-oss:20b"
+    base_url: "http://localhost:11434/v1"
+    api_key: "ollama"
+    temperature: 0.7
+    max_tokens: 2048
 
 conditions:
   - id: "mbrp"

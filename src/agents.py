@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, Optional, Tuple
 from src.schemas import CompanyAgentResponse, ArbitratorResponse, Proposal
-from src.llm import call_gemini_structured
+from src.llm import call_structured_llm
 
 
 class NegotiationAgent:
@@ -14,13 +14,21 @@ class NegotiationAgent:
         role: str,
         walkaway: int,
         model_name: str,
-        thinking_level: str = "MINIMAL"
+        thinking_level: str = "MINIMAL",
+        provider: str = "gemini",
+        temperature: Optional[float] = None,
+        base_url: Optional[str] = None,
+        api_key: Optional[str] = None,
     ):
         self.company_name = company_name
         self.role = role
         self.walkaway = walkaway
         self.model_name = model_name
         self.thinking_level = thinking_level
+        self.provider = provider
+        self.temperature = temperature
+        self.base_url = base_url
+        self.api_key = api_key
         self.system_instruction = self._build_system_instruction()
 
     def _build_system_instruction(self) -> str:
@@ -52,12 +60,16 @@ class NegotiationAgent:
 
     def generate_response(self, prompt: str) -> Tuple[CompanyAgentResponse, Dict[str, Any]]:
         """Generates a structured response from the model."""
-        parsed_dict, metadata = call_gemini_structured(
+        parsed_dict, metadata = call_structured_llm(
+            provider=self.provider,
             model=self.model_name,
             contents=prompt,
             response_schema=CompanyAgentResponse,
             thinking_level=self.thinking_level,
+            temperature=self.temperature,
             system_instruction=self.system_instruction,
+            base_url=self.base_url,
+            api_key=self.api_key,
         )
         return CompanyAgentResponse.model_validate(parsed_dict), metadata
 
@@ -68,10 +80,18 @@ class ArbitratorAgent:
     def __init__(
         self,
         model_name: str,
-        thinking_level: str = "MINIMAL"
+        thinking_level: str = "MINIMAL",
+        provider: str = "gemini",
+        temperature: Optional[float] = None,
+        base_url: Optional[str] = None,
+        api_key: Optional[str] = None,
     ):
         self.model_name = model_name
         self.thinking_level = thinking_level
+        self.provider = provider
+        self.temperature = temperature
+        self.base_url = base_url
+        self.api_key = api_key
         self.system_instruction = self._build_system_instruction()
 
     def _build_system_instruction(self) -> str:
@@ -92,11 +112,15 @@ class ArbitratorAgent:
 
     def generate_response(self, prompt: str) -> Tuple[ArbitratorResponse, Dict[str, Any]]:
         """Generates a structured proposal from the arbitrator."""
-        parsed_dict, metadata = call_gemini_structured(
+        parsed_dict, metadata = call_structured_llm(
+            provider=self.provider,
             model=self.model_name,
             contents=prompt,
             response_schema=ArbitratorResponse,
             thinking_level=self.thinking_level,
+            temperature=self.temperature,
             system_instruction=self.system_instruction,
+            base_url=self.base_url,
+            api_key=self.api_key,
         )
         return ArbitratorResponse.model_validate(parsed_dict), metadata
