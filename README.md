@@ -166,3 +166,84 @@ the outcome.
 - Free negotiation: agents speak in a random order, fixed for the game.
 - Board vote: proposals in a round are submitted without seeing each other; votes are also cast without seeing each other. Identical proposals are merged into one option.
 - Arbitrator: only the arbitrator sees each company's report, and the arbitrator's rationale is shown to all companies without revealing any claim. The arbitrator is told to be neutral and is not given a rule for splitting.
+
+## Cross-model games: Claude vs Gemini (added Nov 18)
+
+In these games the three firms are not all played by the same model: each seat, and the arbitrator,
+can be a different model from `config.yaml`. Logs are in `results/logs/1118_cross_model_claude_gemini/`.
+
+**Run**
+
+```bash
+# Mock agents first (no API keys, no cost): every mixed seating once
+.venv/bin/python run_experiment.py --dry-run --mix claude gemini_flash_lite --runs 1
+
+# What we ran: Claude Haiku 5.5 vs Gemini 3.5 Flash-Lite, 6 seatings x 2 runs per condition
+.venv/bin/python run_experiment.py --mix claude gemini_flash_lite --runs 2 --out results/logs/1118_cross_model_claude_gemini
+
+# Tables and headline numbers (needs pandas)
+python analysis/cross_model_analyze.py results/logs/1118_cross_model_claude_gemini results/cross_model
+python analysis/cross_model_summary.py results/cross_model
+```
+
+- `--mix` takes two or three model keys. With two models it plays every 2-against-1 seating (six per
+  run, so each model holds each company equally often); with three, all six orderings.
+- `--arbitrator-model KEY` fixes the arbitrator's model. The default, `rotate`, alternates through the
+  mixed models.
+- `--first-run N` starts at run N, so two processes can split the runs.
+- Files are named `<condition>__mix_<G-Corp model>-<Yang model>-<Chang-Liu model>__run<nn>.jsonl`. The
+  config line also records `agent_model_keys` and `agent_models`.
+
+**API keys and rate limits.** `.env.example` lists every key. For Gemini without `gcloud`, an AI Studio
+key in `GEMINI_API_KEY` works (`VERTEX_API_KEY` takes a Vertex AI express-mode key). On the free tier,
+`GEMINI_MIN_INTERVAL=4.3` (seconds between calls) keeps one process under 15 requests per minute and
+`GEMINI_MAX_RETRIES=15` rides out 429 errors; the client waits as long as each 429 asks. `ANTHROPIC_TIMEOUT`
+(seconds) and `GEMINI_TIMEOUT_MS` cap a single request, so a stalled call is retried instead of hanging.
+We ran each condition as its own process with `ANTHROPIC_TIMEOUT=90 GEMINI_TIMEOUT_MS=60000
+GEMINI_MIN_INTERVAL=4.3 GEMINI_MAX_RETRIES=15`.
+
+**Results** (32 games, tables in `results/cross_model/`)
+
+| Mechanism | Games | Deals | A firm below walk-away | Gain over walk-away per seat in deals, $K (Claude / Gemini) | Claude seats below walk-away | Gemini seats below walk-away |
+|---|---|---|---|---|---|---|
+| Free | 12 | 7 | 0 | +40 / +64 | 0 of 18 | 0 of 18 |
+| Board vote | 12 | 12 | 9 | −18 / +118 | 9 of 18 | 0 of 18 |
+| Arbitrator | 8 | 5 | 0 | +28 / +83 | 0 of 13 | 0 of 11 |
+| All | 32 | 24 | 9 | +10 / +97 | 9 of 49 | 0 of 47 |
+
+- Board vote: in every vote that outvoted a firm (11 of 12; the other was unanimous), the outvoted firm
+  was a Claude agent, including all 6 games where Claude held two of the three seats. Winning pairs were
+  not model blocs (a same-model pair won 5 of 11 two-firm majorities), but every winning coalition
+  included a Gemini agent.
+- In games with a deal, Claude seats trailed Gemini seats in the same game by $97K on average (95%
+  bootstrap interval $43K to $152K; 24 games).
+- Honesty: Gemini agents stated walk-away values 1.9× the truth in the opening question and 2.8× to the
+  arbitrator. Claude agents declined every opening question and told the arbitrator 1.1× the truth.
+
+## Claude replicate (added Nov 18)
+
+`results/logs/1118_claude_haiku_replicate/` holds 27 more single-model Claude Haiku 5.5 games: runs 2–10
+of each condition, played independently of the runs 2–10 in `results/logs/` with the same seeds, model
+and settings. LLM replies vary, so they are different games. They are in their own folder so the default
+`metrics.py` tables stay as they are. The two sets agree (`metrics.py`, 9 games per condition each):
+
+| | Runs 2–10 in `results/logs/` | Replicate |
+|---|---|---|
+| Free: deal rate | 9 of 9 | 8 of 9 |
+| Board vote: games with a firm below walk-away | 9 of 9 | 9 of 9 |
+| Arbitrator: deal rate | 9 of 9 | 9 of 9 |
+| Arbitrator: claimed ÷ true walk-away | 1.02 | 1.13 |
+| Distance from the Nash split, $K (free / vote / arbitrator) | 68 / 277 / 41 | 76 / 246 / 51 |
+
+```bash
+python metrics.py --logs results/logs/1118_claude_haiku_replicate --out results/claude_replicate
+```
+
+**Notes**
+
+- The arbitrator cell has 8 of the planned 12 mixed games (every seating once, plus two repeats) because
+  the Gemini free-tier daily quota ran out, so its seats are not balanced across companies.
+- Claude and Gemini differ in more than honesty, so this one pairing cannot show whether bluffing or
+  another model difference drives the gap. Other pairings would.
+- `metrics.py` does not read subfolders of `--logs`, so the gpt-oss, replicate and cross-model logs need
+  their own `--logs` runs.
