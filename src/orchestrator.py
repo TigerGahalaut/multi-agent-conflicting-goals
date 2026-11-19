@@ -25,6 +25,8 @@ def run_single_negotiation(
     thinking_level: str = "MINIMAL",
     provider: str = "gemini",
     temperature: Optional[float] = None,
+    base_url: Optional[str] = None,
+    api_key: Optional[str] = None,
     run_index: int = 0,
     max_rounds: int = 8,
     agent_configs: Optional[Dict[str, Dict[str, Any]]] = None,
@@ -40,6 +42,8 @@ def run_single_negotiation(
         thinking_level: 'MINIMAL', 'LOW', 'MEDIUM', 'HIGH' (for reasoning models).
         provider: 'gemini', 'openai', or 'anthropic'.
         temperature: Sampling temperature (for models that support it).
+        base_url: Optional base URL (e.g. for local Ollama).
+        api_key: Optional API key override.
         run_index: 0-indexed repetition counter (used for proposer balancing).
         max_rounds: Maximum negotiation rounds (default 8).
         agent_configs: Optional dictionary assigning specific models/providers per company:
@@ -63,15 +67,15 @@ def run_single_negotiation(
             c_model = c_cfg.get("model_name", model_name)
             c_think = c_cfg.get("thinking_level", thinking_level)
             c_temp = c_cfg.get("temperature", temperature)
-            c_base = c_cfg.get("base_url")
-            c_key = c_cfg.get("api_key")
+            c_base = c_cfg.get("base_url", base_url)
+            c_key = c_cfg.get("api_key", api_key)
         else:
             c_provider = provider
             c_model = model_name
             c_think = thinking_level
             c_temp = temperature
-            c_base = None
-            c_key = None
+            c_base = base_url
+            c_key = api_key
 
         agents[c_name] = NegotiationAgent(
             company_name=c_name,
@@ -125,8 +129,8 @@ def run_single_negotiation(
             thinking_level=arb_cfg.get("thinking_level", thinking_level),
             provider=arb_cfg.get("provider", provider),
             temperature=arb_cfg.get("temperature", temperature),
-            base_url=arb_cfg.get("base_url"),
-            api_key=arb_cfg.get("api_key"),
+            base_url=arb_cfg.get("base_url", base_url),
+            api_key=arb_cfg.get("api_key", api_key),
         )
         condition = ArbitratorNegotiation(
             run_id=run_id,

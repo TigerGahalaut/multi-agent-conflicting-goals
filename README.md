@@ -255,8 +255,15 @@ pytest tests/
 # A. Run a Mixed-Model Game (e.g. G-Corp=Claude, Yang=GPT-4o, Chang-Liu=Gemini):
 python scripts/run_mixed_model.py --condition board_vote --runs 1
 
-# B. Run Homogeneous Experiment Grid:
-python scripts/run_experiments.py --conditions free arbitrator --models gemini-3.8-flash --runs 5
+# B. Run Homogeneous Games (All 3 companies use the same model):
+# Run with Anthropic Claude:
+python scripts/run_experiments.py --models claude --conditions board_vote --runs 1
+
+# Run with OpenAI GPT-4o:
+python scripts/run_experiments.py --models gpt --conditions free --runs 1
+
+# Run with Google Gemini:
+python scripts/run_experiments.py --models gemini_flash --conditions arbitrator --runs 5
 ```
 
 ### 6. Run Analysis & Generate Figures
