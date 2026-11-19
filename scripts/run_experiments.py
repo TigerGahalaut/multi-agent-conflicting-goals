@@ -3,7 +3,7 @@ Iterates over conditions x models x runs with checkpointing and resumability.
 Supports all models configured in config.yaml:
   - Gemini: gemini_flash_lite, gemini_flash
   - Anthropic: claude (claude-haiku-5-5)
-  - OpenAI: gpt (gpt-4o), gpt_oss (gpt-oss:20b via Ollama)
+  - OpenAI: gpt (gpt-6-luna), gpt_oss (gpt-oss:20b via Ollama)
 
 Examples:
   python scripts/run_experiments.py --models claude --conditions board_vote --runs 1
@@ -26,7 +26,7 @@ from src.orchestrator import run_single_negotiation
 from src.storage import SUMMARY_CSV_PATH
 
 CONFIG_PATH = Path(__file__).resolve().parent.parent / "config.yaml"
-DEFAULT_CONDITIONS = ["mbrp", "board_vote", "arbitrator"]
+DEFAULT_CONDITIONS = ["mbrp", "free", "board_vote", "arbitrator"]
 DEFAULT_RUNS = 10
 
 
@@ -79,7 +79,7 @@ def main():
         "--conditions",
         nargs="+",
         default=None,
-        help="Conditions to run: mbrp, free, board_vote, arbitrator (default: mbrp, board_vote, arbitrator)",
+        help="Conditions to run: mbrp, free, board_vote, arbitrator (default: mbrp, free, board_vote, arbitrator)",
     )
     parser.add_argument(
         "--models",

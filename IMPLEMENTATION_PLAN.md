@@ -3,8 +3,8 @@
 **Project:** Conflicting Goals: How do governance mechanisms affect conflict resolution among AI agents with competing interests?  
 **Team:** Skynet (Team ID: 67)  
 **GCP Project:** `ai-gov-514900`  
-**Date:** November 18, 2026  
-**Status:** **Complete & Fully Verified.** All 8 initial phases implemented plus **Phase 9 (Free Negotiation Protocol)** and **Phase 10 (Coalition Detection & Strategic Bluffing Decomposition)** completed across **80 full negotiations** (100% of matrix executed).
+**Date:** November 19, 2026  
+**Status:** **Complete & Fully Verified.** All 15 phases implemented across both **Homogeneous Baseline Negotiations** (80 full runs) and **Heterogeneous Cross-Vendor Latin Square Negotiations** (48 full runs across Claude Haiku 5.5, GPT-6 Luna, and Gemini 3.8 Flash), plus smoke-tests, totaling **136 fully logged negotiations** in `results/summary.csv` and `transcripts/`.
 
 ---
 
@@ -19,25 +19,25 @@ This study examines how governance mechanisms influence bargaining outcomes when
   - **Chang-Liu Cloud Services (Cloud Provider):** $100,000
   - **Total Outside Options:** $850,000 | **Net Cooperative Surplus:** $150,000
 - **Deadline:** 8 rounds maximum. If no deal is finalized by the end of Round 8, negotiations terminate, the venture dissolves, each company receives its true walk-away value, and the $150,000 surplus is destroyed ($0 realized surplus).
-- **Experimental Matrix:** 
-  $$\text{4 Governance Conditions} \times \text{2 Model Tiers} \times \text{10 Repetitions} = \mathbf{80\text{ Negotiations}}$$
-- **Budget & Infrastructure:** All experiments execute locally via Antigravity on Windows, backed by GCP Vertex AI (`ai-gov-514900`) using promotional credits ($50 cap).
+- **Experimental Corpus (136 Negotiations Total):** 
+  1. **Homogeneous Baseline Matrix (80 runs):** 4 Governance Conditions $\times$ 2 Gemini Model Tiers $\times$ 10 Repetitions.
+  2. **Homogeneous Frontier Cross-Vendor Smoke Tests (8 runs):** Claude Haiku 5.5 and GPT-6 Luna baseline evaluations across MBRP, Board Vote, and Arbitrator.
+  3. **Heterogeneous Cross-Vendor Latin Square Matrix (48 runs):** 4 Governance Conditions $\times$ 3 Competing LLM Providers (Claude Haiku 5.5 vs. GPT-6 Luna vs. Gemini 3.8 Flash) $\times$ 4 Balanced Rotation Cycles ($N=12$ runs/condition).
+- **Budget & Infrastructure:** All experiments execute locally via Antigravity on Windows, backed by GCP Vertex AI (`ai-gov-514900`), Anthropic API, and OpenAI API with zero secret leakage in Git.
 
 ---
 
-## 1. Locked Technical & Model Configuration
+## 1. Locked Technical & Multi-Provider Model Configuration
 
-| Parameter | Specification | Notes |
-|---|---|---|
-| **Cloud Provider** | GCP Vertex AI | Project `ai-gov-514900`, `location="global"` |
-| **Authentication** | Application Default Credentials (ADC) | No hardcoded or environment API keys |
-| **SDK** | `google-genai` (v3.5+) | Uses `genai.Client(vertexai=True)` |
-| **Model Tier A** | `gemini-3.5-flash-lite` | Baseline efficiency model |
-| **Model Tier B** | `gemini-3.8-flash` | Frontier reasoning/speed tier |
-| **Thinking Level** | `MINIMAL` (Tier A), `LOW` (Tier B) | Explicitly configured and logged per API call |
-| **Sampling Temperature** | Default (unspecified) | Omitted per Google GenAI guidance for 3.x models |
-| **Output Enforcement** | Native SDK JSON + Python Validation | `response_schema` enforced at API level; domain math validated in Python |
-| **Reproducibility** | Full Metadata Logging | Logs `model_version`, tokens (`usage_metadata`), and seeds |
+The experimental architecture supports both single-model homogeneous batteries and cross-vendor heterogeneous negotiations:
+
+| Provider | Model Name | Role in Experiments | API / SDK Integration | Output Enforcement & Configuration |
+|---|---|---|---|---|
+| **Google Cloud Vertex AI** | `gemini-3.8-flash` | Frontier reasoning / Fixed Neutral Arbitrator / JV Partner | `google-genai` (Vertex AI ADC, project `ai-gov-514900`) | Native Pydantic `response_schema`; `thinking_level="LOW"`; `max_output_tokens=8192` |
+| **Google Cloud Vertex AI** | `gemini-3.5-flash-lite` | Baseline efficiency tier | `google-genai` (Vertex AI ADC) | Native Pydantic `response_schema`; `thinking_level="MINIMAL"` |
+| **Anthropic** | `claude-haiku-5-5` | Frontier fast reasoning / JV Partner | `anthropic` SDK (API Key) | Native tool-use schema enforcement (`submit_response`); automatic exponential backoff |
+| **OpenAI** | `gpt-6-luna` | Frontier reasoning / JV Partner | `openai` SDK (API Key) | Pydantic parse (`beta.chat.completions.parse`); dynamic parameter stripping (temperature stripped on reasoning models) |
+| **Ollama (Optional)** | `gpt-oss:20b` | Local offline open-weights baseline | OpenAI-compatible endpoint | Structured JSON mode fallback |
 
 ---
 
@@ -92,7 +92,7 @@ We explicitly study and compare **institutions**, acknowledging that mechanisms 
 - **Seeded Tie-Breaker:** 3–0 votes defeat 2–1 votes; ties resolved via deterministic SHA-256 lottery.
 
 ### 2.3 Condition 3: Neutral Arbitrator (Mediated Dispute Resolution)
-- **Neutral 4th Agent:** Impartial arbiter with no financial stake.
+- **Neutral 4th Agent:** Impartial court-appointed arbiter with no financial stake. In mixed-model games, the Arbitrator is pinned to a fixed neutral benchmark (**Google Gemini 3.8 Flash** with `thinking_level="LOW"`).
 - **Stage 1 (Confidential Caucusing):** Companies submit private walkaway claims and strategic notes to the Arbitrator.
 - **Stage 2 (Arbitrator Award):** Neutral arbiter formulates a single binding split with public explanation.
 - **Stage 3 (Ratification Ballot):** All 3 companies simultaneously vote `ACCEPT` or `REJECT`. Deal requires 3/3 unanimous consent.
@@ -136,6 +136,19 @@ Tracks strategic manipulation across conditions:
 - **Mean Inflation Ratio (x):** $\text{Claimed Walkaway} \div \text{True Walkaway}$ ($450K for G-Corp, $300K for Yang, $100K for Chang-Liu).
 - **Longitudinal Drift:** $\text{Final Claim} - \text{First Claim}$ across rounds.
 
+### 3.5 Balanced Latin Square Experimental Design (Confound Elimination)
+To eliminate the critical experimental confound between **economic role leverage** (G-Corp's strong \$450K walkaway vs. Chang-Liu's weak \$100K walkaway) and **LLM model intelligence**, the heterogeneous runner (`scripts/run_mixed_model.py`) implements a deterministic 3-way Latin Square round-robin rotation:
+
+$$\text{ModelIndex} = (\text{RoleIndex} + \text{RunIndex}) \pmod 3$$
+
+| Run Index / Shift | G-Corp (\$450K Walkaway) | Yang Industries (\$300K Walkaway) | Chang-Liu (\$100K Walkaway) | Neutral Arbitrator |
+| :---: | :---: | :---: | :---: | :---: |
+| **Shift 0 (Runs 1, 4, 7, 10)** | **Claude Haiku 5.5** | **GPT-6 Luna** | **Gemini 3.8 Flash** | Gemini 3.8 Flash (fixed) |
+| **Shift 1 (Runs 2, 5, 8, 11)** | **GPT-6 Luna** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | Gemini 3.8 Flash (fixed) |
+| **Shift 2 (Runs 3, 6, 9, 12)** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | **GPT-6 Luna** | Gemini 3.8 Flash (fixed) |
+
+Across 12 runs per condition (4 full cycles), every single model plays every corporate seat exactly 4 times ($N=4$ observations per cell; $N=48$ observations per model overall), ensuring completely unconfounded comparative benchmarks.
+
 ---
 
 ## 4. Software Architecture & Implementation
@@ -144,21 +157,21 @@ Tracks strategic manipulation across conditions:
 final_project/
 ├── IMPLEMENTATION_PLAN.md          # Master specification (this document)
 ├── README.md                       # Public documentation & empirical findings
-├── config.yaml                     # Simulation parameters (4 conditions)
-├── requirements.txt                # Pinned dependencies
+├── config.yaml                     # Simulation parameters & configured model definitions
+├── requirements.txt                # Pinned dependencies (google-genai, openai, anthropic, pydantic)
 ├── src/
-│   ├── llm.py                      # Vertex AI client adapter & backoff retry logic
-│   ├── schemas.py                  # Pydantic schemas (turns, proposals, RunResult)
+│   ├── llm.py                      # Multi-provider gateway (Vertex AI, Anthropic, OpenAI, Ollama)
+│   ├── schemas.py                  # Pydantic schemas (turns, proposals, Ballot, RunResult)
 │   ├── validators.py               # Pure-Python split, vote, and tie-break validation
 │   ├── agents.py                   # Role prompts, context history, and turn actions
 │   ├── conditions/
 │   │   ├── base.py                 # Abstract base class & outcome compiler
 │   │   ├── mbrp.py                 # Rotating proposer protocol
 │   │   ├── board_vote.py           # 3-stage deliberation, motion, secret ballot
-│   │   ├── arbitrator.py           # Confidential caucus & neutral award
+│   │   ├── arbitrator.py           # Confidential caucus & neutral award (pinned Gemini judge)
 │   │   └── free_negotiation.py     # Turn-based conversational bargaining
-│   ├── orchestrator.py             # Multi-run experiment engine
-│   ├── storage.py                  # JSONL event stream & summary.csv (38 columns)
+│   ├── orchestrator.py             # Multi-run experiment engine (homogeneous & mixed-model)
+│   ├── storage.py                  # Robust JSONL event stream & summary.csv (38 columns)
 │   └── metrics.py                  # Nash distance, coalition breakdown, bluffing analysis
 ├── tests/
 │   ├── test_validators.py          # Math, negative values, and tie-breaking tests
@@ -167,10 +180,12 @@ final_project/
 ├── scripts/
 │   ├── run_smoke_test.py           # Single inference check
 │   ├── run_pilot.py                # 3-run verification pilot
-│   ├── run_experiments.py          # Master runner supporting CLI filtering
+│   ├── test_providers.py           # Multi-provider connectivity and structured output test
+│   ├── run_experiments.py          # Master homogeneous runner supporting CLI filtering
+│   ├── run_mixed_model.py          # Heterogeneous runner with Latin Square round-robin rotation
 │   └── analyze_results.py          # Visualizations & comprehensive statistics generator
-├── transcripts/                    # 80 multi-turn JSONL negotiation transcripts
-└── results/                        # summary.csv (80 runs, 38 columns) and plots
+├── transcripts/                    # 136 multi-turn JSONL negotiation transcripts
+└── results/                        # summary.csv (136 logged runs, 38 columns) and publication plots
 ```
 
 ---
@@ -188,6 +203,11 @@ flowchart TD
     P7 --> P8["Phase 8: Analysis, Metrics & Artifacts"]
     P8 --> P9["Phase 9: Free Negotiation Protocol (80 Runs Total)"]
     P9 --> P10["Phase 10: Coalition & Bluffing Decomposition Metrics"]
+    P10 --> P11["Phase 11: Multi-Provider LLM Gateway (Claude, GPT, Gemini)"]
+    P11 --> P12["Phase 12: Schema Sanitization for Universal Validation"]
+    P12 --> P13["Phase 13: Heterogeneous Asymmetric Bargaining Engine"]
+    P13 --> P14["Phase 14: Balanced Latin Square Matrix Execution (48 Games)"]
+    P14 --> P15["Phase 15: Cross-Platform Hardening & Real-Time Observability"]
 ```
 
 ### Phase 1: Scaffolding & Configuration — *Completed*
@@ -227,13 +247,44 @@ flowchart TD
   - Strategic claim bluffing profiles (Chang-Liu inflated claims by +77% to +100% while G-Corp was 100% truthful).
 - Added comprehensive unit tests in `tests/test_metrics.py` (total suite expanded to **19 passed tests**).
 
+### Phase 11: Multi-Provider LLM Gateway (Cross-Vendor Support) — *Completed*
+- Engineered unified multi-provider calling engine in `src/llm.py` supporting:
+  - **Anthropic Claude (`claude-haiku-5-5`):** Tool-use structured schema (`submit_response`) with exponential backoff retries.
+  - **OpenAI (`gpt-6-luna`):** Pydantic parsing via `client.beta.chat.completions.parse`, with dynamic stripping of unsupported `temperature` parameters on frontier reasoning models.
+  - **Google Gemini (`gemini-3.8-flash` & `gemini-3.5-flash-lite`):** Native `GenerateContentConfig` with dual-mode authentication (Vertex AI ADC vs Google AI Studio API key) and environment isolation suppressing ambient key hijacking.
+- Created `scripts/test_providers.py` to verify schema validation and connectivity across all 3 providers simultaneously.
+
+### Phase 12: Schema Sanitization for Universal Cross-Model Interoperability — *Completed*
+- Replaced open dictionary `Dict[str, Literal["YES", "NO"]]` on `ballot` with a strictly typed `Ballot` Pydantic model (`g_corp`, `yang_industries`, `chang_liu`) in `src/schemas.py`.
+- Eliminated `additionalProperties` keywords from the generated OpenAPI schema, resolving Google Gemini 400 schema validation errors and guaranteeing identical schema interpretation across Anthropic, OpenAI, and Google GenAI.
+
+### Phase 13: Heterogeneous Asymmetric Bargaining Engine — *Completed*
+- Implemented `scripts/run_mixed_model.py` and extended `src/orchestrator.py` to support multi-provider multi-agent interaction.
+- Assigned distinct frontier models to each corporate entity:
+  - G-Corp: Chip Designer (e.g. Anthropic Claude)
+  - Yang Industries: Hardware Manufacturer (e.g. OpenAI GPT-6 Luna)
+  - Chang-Liu Cloud Services: Cloud Infrastructure (e.g. Google Gemini 3.8 Flash)
+- Pinned the Neutral Court-Appointed Arbitrator to a fixed benchmark (**Google Gemini 3.8 Flash** with reasoning) to ensure invariant, objective judicial awards across all conditions.
+
+### Phase 14: Balanced Latin Square Matrix Execution (48 Games) — *Completed*
+- Designed and executed a 3-agent cyclic Latin Square round-robin rotation ($ModelIndex = (RoleIndex + RunIndex) \pmod 3$) across 4 full cycles ($N=12$ runs/condition, 48 games total).
+- Completely eliminated the economic role/outside option confound, allowing unbiased cross-model capability comparison.
+- Uncovered powerful empirical findings:
+  - **Board Vote (100% deal rate, 1.7 avg rounds):** In 50% of games, the two smaller firms (Yang + Chang-Liu) formed an "Underdog Alliance" to outvote G-Corp and extract higher shares.
+  - **Arbitrator (100% deal rate, 4.8 avg rounds):** Zero walkaway violations; unanimous 3/3 ratified agreement in every single game.
+  - **MBRP (41.7% deal rate, 7.4 avg rounds):** High holdout and deadlock rate (58.3%) under strict sequential unanimity.
+  - **Model Surplus Extraction:** Gemini 3.8 Flash extracted **+$52,667** average surplus; GPT-6 Luna extracted **+$46,917**; Claude Haiku 5.5 extracted **+$25,417**.
+
+### Phase 15: Cross-Platform Windows Hardening & Real-Time Observability — *Completed*
+- **Filename Sanitization:** Replaced Windows-illegal colon characters (`:`) in model tags with underscores in `src/orchestrator.py` and added regex sanitization `re.sub(r'[\/:*?"<>|]', '_', model_name)` in `src/storage.py`, resolving `[Errno 22]` on Windows NTFS filesystems.
+- **Thinking Token Buffer Expansion:** Expanded `max_output_tokens` in `call_gemini_structured` from 4,096 to **8,192** to guarantee ample headroom for intensive internal reasoning without truncating candidate JSON output.
+- **Real-Time Observability:** Added live round-by-round console progress indicators (`-> Round X/8...`) across all 4 governance condition loops.
+
 ---
 
-## 6. Budget & Security Guardrails
+## 6. Budget, Security & Cross-Platform Guardrails
 
-1. **Credit Envelope:** \$50 promotional GCP credit (expiration January 22, 2027).
-2. **Actual Usage:** Total experiment battery across 80 full runs executed well within quota and budget envelope.
-3. **Hard Spend Protection:**
-   - Per-turn retry limit: Max 1 retry on malformed output before defaulting to `REJECT`.
-   - Max output tokens capped at 1,024 per agent response.
-4. **Secret Management:** Zero credential storage in Git; authenticated exclusively through local ADC.
+1. **Multi-Provider Secret Management:** All API keys (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GOOGLE_CLOUD_PROJECT`) loaded exclusively from untracked `.env` file via `python-dotenv`. Zero hardcoded credentials in Git.
+2. **Environment Isolation:** Ambient environment keys (`GOOGLE_API_KEY`, `GEMINI_API_KEY`) are dynamically suppressed in Python process memory when `GOOGLE_CLOUD_PROJECT` is set to ensure reliable Vertex AI ADC routing without billing collisions.
+3. **Cross-Platform Storage Integrity:** Filename formatting strictly complies with Windows and POSIX filesystem constraints, ensuring safe transcript and CSV logging across operating systems.
+4. **API Backoff & Resilience:** Exponential backoff with jitter on transient rate limits (429/503) and automatic parameter adjustment on reasoning models.

@@ -13,9 +13,8 @@ from src.llm import call_structured_llm
 
 
 def test_gemini():
-    has_key = bool(os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
     has_project = bool(os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("GCP_PROJECT_ID"))
-    mode = "Google AI Studio API Key" if has_key else f"Vertex AI ADC (Project: {os.environ.get('GOOGLE_CLOUD_PROJECT', 'default')})"
+    mode = f"Vertex AI ADC (Project: {os.environ.get('GOOGLE_CLOUD_PROJECT', 'default')})" if has_project else "Google AI Studio API Key"
     print(f"\n--- 1. Testing Google Gemini (Mode: {mode}) ---")
     try:
         prompt = "G-Corp has a walkaway of 450K. Make an opening proposal dividing 1000K."
@@ -50,7 +49,7 @@ def test_openai():
         return None
 
     try:
-        model = os.environ.get("OPENAI_TEST_MODEL", "gpt-4o" if has_key else "gpt-oss:20b")
+        model = os.environ.get("OPENAI_TEST_MODEL", "gpt-6-luna" if has_key else "gpt-oss:20b")
         prompt = "Yang Industries has a walkaway of 300K. Propose a split of 1000K."
         system = "You are negotiating for Yang Industries."
         parsed, meta = call_structured_llm(
