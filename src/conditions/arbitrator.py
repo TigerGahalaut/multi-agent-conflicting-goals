@@ -38,6 +38,7 @@ class ArbitratorNegotiation(BaseCondition):
         arbitrator_feedback_history: List[str] = []
 
         for round_num in range(1, self.max_rounds + 1):
+            print(f"  -> Round {round_num}/{self.max_rounds} (Caucus & Ratification)...", flush=True)
             # -------------------------------------------------------------
             # Stage 1: Confidential Caucusing
             # -------------------------------------------------------------

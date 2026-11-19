@@ -3,6 +3,7 @@
 import json
 import csv
 import os
+import re
 from pathlib import Path
 from typing import List
 from src.schemas import RoundEvent, RunResult
@@ -24,7 +25,7 @@ def save_transcript(events: List[RoundEvent], run_id: str, condition_id: str, mo
     Returns the file path.
     """
     ensure_directories()
-    safe_model = model_name.replace("/", "_")
+    safe_model = re.sub(r'[\/:*?"<>|]', '_', model_name)
     filename = f"{condition_id}_{safe_model}_{run_id}.jsonl"
     filepath = TRANSCRIPTS_DIR / filename
 

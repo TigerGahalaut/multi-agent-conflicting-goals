@@ -38,7 +38,7 @@ def run_single_negotiation(
     Args:
         run_id: Unique identifier for this run.
         condition_id: One of 'mbrp', 'free', 'board_vote', 'arbitrator'.
-        model_name: Default model identifier (e.g. 'gemini-3.5-flash-lite', 'gpt-4o', 'claude-haiku-5-5').
+        model_name: Default model identifier (e.g. 'gemini-3.5-flash-lite', 'gpt-6-luna', 'claude-haiku-5-5').
         thinking_level: 'MINIMAL', 'LOW', 'MEDIUM', 'HIGH' (for reasoning models).
         provider: 'gemini', 'openai', or 'anthropic'.
         temperature: Sampling temperature (for models that support it).
@@ -49,7 +49,7 @@ def run_single_negotiation(
         agent_configs: Optional dictionary assigning specific models/providers per company:
             {
                 "G-Corp": {"provider": "anthropic", "model_name": "claude-haiku-5-5"},
-                "Yang Industries": {"provider": "openai", "model_name": "gpt-4o"},
+                "Yang Industries": {"provider": "openai", "model_name": "gpt-6-luna"},
                 "Chang-Liu Cloud Services": {"provider": "gemini", "model_name": "gemini-3.8-flash"}
             }
         arbitrator_config: Optional specific provider/model config for the neutral arbitrator.
@@ -91,7 +91,7 @@ def run_single_negotiation(
 
     # Effective tag for model reporting in metadata
     if agent_configs:
-        effective_model_tag = "mixed_" + "-".join(f"{k[:3]}:{v.get('model_name','')[:7]}" for k, v in sorted(agent_configs.items()))
+        effective_model_tag = "mixed_" + "-".join(f"{k[:3]}_{v.get('model_name','')[:7]}" for k, v in sorted(agent_configs.items()))
     else:
         effective_model_tag = model_name
 

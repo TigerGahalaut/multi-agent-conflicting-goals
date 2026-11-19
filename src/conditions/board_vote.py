@@ -44,6 +44,7 @@ class BoardVoteNegotiation(BaseCondition):
         history_summary: List[str] = []
 
         for round_num in range(1, self.max_rounds + 1):
+            print(f"  -> Round {round_num}/{self.max_rounds} (Signaling & Vote)...", flush=True)
             # -------------------------------------------------------------
             # Stage 1: Simultaneous Public Signaling
             # -------------------------------------------------------------
@@ -161,7 +162,7 @@ class BoardVoteNegotiation(BaseCondition):
                     round_num=round_num,
                     stage="cast_ballot",
                     agent_id=comp_name,
-                    payload={"ballot": agent_ballot, "raw_message": resp.public_message},
+                    payload={"ballot": agent_ballot.model_dump() if hasattr(agent_ballot, "model_dump") else agent_ballot, "raw_message": resp.public_message},
                 )
 
             # Evaluate ballot

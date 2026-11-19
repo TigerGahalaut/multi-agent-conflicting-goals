@@ -54,6 +54,7 @@ class FreeNegotiation(BaseCondition):
         accepted_firms: Set[str] = set()
 
         for round_num in range(1, self.max_rounds + 1):
+            print(f"  -> Round {round_num}/{self.max_rounds} (Free Deliberation)...", flush=True)
             # Fixed random turn order per round for ecological realism
             turn_order = list(self.company_order)
             self.rng.shuffle(turn_order)

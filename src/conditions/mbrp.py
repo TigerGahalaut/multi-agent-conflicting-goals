@@ -44,6 +44,7 @@ class MBRPNegotiation(BaseCondition):
             proposer_idx = (self.start_offset + round_num - 1) % len(self.company_order)
             proposer_name = self.company_order[proposer_idx]
             responders = [c for c in self.company_order if c != proposer_name]
+            print(f"  -> Round {round_num}/{self.max_rounds} (Proposer: {proposer_name})...", flush=True)
 
             # Stage 1: Proposer tables formal split
             proposer_agent = self.agents[proposer_name]

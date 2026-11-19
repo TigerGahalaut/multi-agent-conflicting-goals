@@ -35,6 +35,46 @@ class Proposal(BaseModel):
         }
 
 
+class Ballot(BaseModel):
+    """Votes on motions tabled by each company in Board Vote."""
+    g_corp: Optional[Literal["YES", "NO"]] = Field(
+        default=None,
+        description="Vote on G-Corp's tabled motion ('YES' or 'NO')"
+    )
+    yang_industries: Optional[Literal["YES", "NO"]] = Field(
+        default=None,
+        description="Vote on Yang Industries' tabled motion ('YES' or 'NO')"
+    )
+    chang_liu: Optional[Literal["YES", "NO"]] = Field(
+        default=None,
+        description="Vote on Chang-Liu Cloud Services' tabled motion ('YES' or 'NO')"
+    )
+
+    def __init__(self, votes: Optional[Dict[str, str]] = None, **data):
+        if votes is not None:
+            data["g_corp"] = votes.get("G-Corp") or votes.get("g_corp")
+            data["yang_industries"] = votes.get("Yang Industries") or votes.get("yang_industries")
+            data["chang_liu"] = votes.get("Chang-Liu Cloud Services") or votes.get("chang_liu")
+        super().__init__(**data)
+
+    @property
+    def votes(self) -> Dict[str, Optional[str]]:
+        return {
+            "G-Corp": self.g_corp,
+            "Yang Industries": self.yang_industries,
+            "Chang-Liu Cloud Services": self.chang_liu,
+        }
+
+    def get(self, key: str, default=None):
+        return self.votes.get(key, default)
+
+    def __getitem__(self, key: str):
+        return self.votes.get(key)
+
+    def __contains__(self, key: str):
+        return key in self.votes and self.votes[key] is not None
+
+
 class CompanyAgentResponse(BaseModel):
     """Structured response from a company negotiator agent."""
     reasoning: str = Field(
@@ -61,9 +101,9 @@ class CompanyAgentResponse(BaseModel):
         default=None,
         description="Vote on active proposal/motion: 'ACCEPT'/'REJECT' in MBRP & Arbitrator, 'YES'/'NO' in Board Vote"
     )
-    ballot: Optional[Dict[str, Literal["YES", "NO"]]] = Field(
+    ballot: Optional[Ballot] = Field(
         default=None,
-        description="Optional map of company name -> 'YES'/'NO' vote for each tabled motion in Board Vote"
+        description="Optional votes on each company's tabled motion in Board Vote"
     )
     counter_proposal: Optional[Proposal] = Field(
         default=None,

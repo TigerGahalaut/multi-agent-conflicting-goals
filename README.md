@@ -237,7 +237,7 @@ cp .env.example .env
 Open `.env` and fill in whichever credentials you have:
 - **Google Gemini:** Set `GEMINI_API_KEY=...` (from [Google AI Studio](https://aistudio.google.com)) **OR** set `GOOGLE_CLOUD_PROJECT=...` (for Vertex AI with ADC).
 - **Anthropic Claude:** Set `ANTHROPIC_API_KEY=...` (for `claude-haiku-5-5`).
-- **OpenAI / Ollama:** Set `OPENAI_API_KEY=...` (for `gpt-4o`) or leave unset if running local open-weights Ollama.
+- **OpenAI / Ollama:** Set `OPENAI_API_KEY=...` (for `gpt-6-luna`) or leave unset if running local open-weights Ollama.
 
 ### 3. Verify Provider Connections
 Verify that your configured providers are reachable and returning valid structured output:
@@ -252,18 +252,21 @@ pytest tests/
 
 ### 5. Running Experiments
 ```powershell
-# A. Run a Mixed-Model Game (e.g. G-Corp=Claude, Yang=GPT-4o, Chang-Liu=Gemini):
+# A. Run Mixed-Model Games (Cross-Vendor: Claude vs. GPT-6 Luna vs. Gemini):
+# Quick 1-game test on Board Vote:
 python scripts/run_mixed_model.py --condition board_vote --runs 1
 
+# Run across all 4 conditions with Latin Square model rotation:
+python scripts/run_mixed_model.py --rotate --runs 3
+
 # B. Run Homogeneous Games (All 3 companies use the same model):
-# Run with Anthropic Claude:
-python scripts/run_experiments.py --models claude --conditions board_vote --runs 1
+# Run across all 4 conditions (mbrp, free, board_vote, arbitrator) for Claude & GPT:
+python scripts/run_experiments.py --models claude gpt --runs 1
 
-# Run with OpenAI GPT-4o:
-python scripts/run_experiments.py --models gpt --conditions free --runs 1
-
-# Run with Google Gemini:
-python scripts/run_experiments.py --models gemini_flash --conditions arbitrator --runs 5
+# Or target specific conditions and models:
+python scripts/run_experiments.py --models claude --conditions free board_vote --runs 1
+python scripts/run_experiments.py --models gpt --conditions free arbitrator --runs 1
+python scripts/run_experiments.py --models gemini_flash --runs 5
 ```
 
 ### 6. Run Analysis & Generate Figures

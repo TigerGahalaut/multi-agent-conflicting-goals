@@ -55,20 +55,26 @@ def get_genai_client(
     if _GENAI_CLIENT is None:
         from google import genai
 
-        gemini_api_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         gcp_project = project_id or os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("GCP_PROJECT_ID")
 
-        if gemini_api_key:
-            logger.info("Initializing GenAI client via Gemini API Key (Google AI Studio)")
-            _GENAI_CLIENT = genai.Client(api_key=gemini_api_key)
-        elif gcp_project:
+        # If GOOGLE_CLOUD_PROJECT is configured, prioritize Vertex AI enterprise pipeline:
+        if gcp_project and not api_key:
             loc = location or os.environ.get("GOOGLE_CLOUD_LOCATION", DEFAULT_LOCATION)
+            # Remove ambient keys from Python process environment so google-genai does not hijack Vertex AI
+            os.environ.pop("GOOGLE_API_KEY", None)
+            os.environ.pop("GEMINI_API_KEY", None)
             logger.info(f"Initializing GenAI client via Vertex AI (Project: {gcp_project}, Location: {loc})")
             _GENAI_CLIENT = genai.Client(vertexai=True, project=gcp_project, location=loc)
+        elif api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"):
+            key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+            logger.info("Initializing GenAI client via Gemini API Key (Google AI Studio)")
+            _GENAI_CLIENT = genai.Client(api_key=key)
         else:
-            # Default fallback: ADC with project if configured, or general ADC
+            loc = location or os.environ.get("GOOGLE_CLOUD_LOCATION", DEFAULT_LOCATION)
+            os.environ.pop("GOOGLE_API_KEY", None)
+            os.environ.pop("GEMINI_API_KEY", None)
             logger.info("Initializing GenAI client with default ADC configuration")
-            _GENAI_CLIENT = genai.Client(vertexai=True, project=DEFAULT_PROJECT_ID, location=DEFAULT_LOCATION)
+            _GENAI_CLIENT = genai.Client(vertexai=True, project=DEFAULT_PROJECT_ID, location=loc)
 
     return _GENAI_CLIENT
 
@@ -110,7 +116,7 @@ def call_gemini_structured(
         response_schema=response_schema,
         thinking_config=thinking_config,
         system_instruction=system_instruction,
-        max_output_tokens=4096,
+        max_output_tokens=8192,
         http_options=http_opts,
     )
 
@@ -193,7 +199,11 @@ def call_openai_structured(
                 parsed_dict = completion.choices[0].message.parsed.model_dump()
                 raw_text = completion.choices[0].message.content or ""
                 usage = completion.usage
-            except Exception:
+            except Exception as parse_err:
+                err_str = str(parse_err).lower()
+                if "temperature" in err_str and "temperature" in kwargs:
+                    kwargs.pop("temperature", None)
+                    continue
                 # Fallback to json_object mode (works with Ollama and OpenAI JSON mode)
                 completion = client.chat.completions.create(
                     model=model,
@@ -224,6 +234,10 @@ def call_openai_structured(
 
         except Exception as e:
             last_error = e
+            err_str = str(e).lower()
+            if "temperature" in err_str and "temperature" in kwargs:
+                kwargs.pop("temperature", None)
+                continue
             logger.warning(f"OpenAI call attempt {attempt + 1} failed: {e}")
             if attempt < max_retries:
                 time.sleep(2.0 * (attempt + 1))
