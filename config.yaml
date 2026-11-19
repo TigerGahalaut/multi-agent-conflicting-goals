@@ -46,7 +46,7 @@ models:
     max_tokens: 16000
   gpt:
     provider: openai
-    model: gpt-4o
+    model: gpt-6-luna
     temperature: null
     max_tokens: 16000
   # Local open-weights model served by Ollama through its OpenAI-compatible API (no API key, no cost).
