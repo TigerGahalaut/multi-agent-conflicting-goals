@@ -22,7 +22,7 @@ This study examines how governance mechanisms influence bargaining outcomes when
 - **Experimental Corpus (136 Negotiations Total):** 
   1. **Homogeneous Baseline Matrix (80 runs):** 4 Governance Conditions $\times$ 2 Gemini Model Tiers $\times$ 10 Repetitions.
   2. **Homogeneous Frontier Cross-Vendor Smoke Tests (8 runs):** Claude Haiku 5.5 and GPT-6 Luna baseline evaluations across MBRP, Board Vote, and Arbitrator.
-  3. **Heterogeneous Cross-Vendor Latin Square Matrix (48 runs):** 4 Governance Conditions $\times$ 3 Competing LLM Providers (Claude Haiku 5.5 vs. GPT-6 Luna vs. Gemini 3.8 Flash) $\times$ 4 Balanced Rotation Cycles ($N=12$ runs/condition).
+  3. **Heterogeneous Cross-Vendor Latin Square Matrix (36 runs):** 4 Governance Conditions $\times$ 3 Competing LLM Providers (Claude Haiku 5.5 vs. GPT-6 Luna vs. Gemini 3.8 Flash) $\times$ 3 Balanced Rotation Cycles ($N=9$ runs/condition, 36 games total).
 - **Budget & Infrastructure:** All experiments execute locally via Antigravity on Windows, backed by GCP Vertex AI (`ai-gov-514900`), Anthropic API, and OpenAI API with zero secret leakage in Git.
 
 ---
@@ -143,11 +143,11 @@ $$\text{ModelIndex} = (\text{RoleIndex} + \text{RunIndex}) \pmod 3$$
 
 | Run Index / Shift | G-Corp (\$450K Walkaway) | Yang Industries (\$300K Walkaway) | Chang-Liu (\$100K Walkaway) | Neutral Arbitrator |
 | :---: | :---: | :---: | :---: | :---: |
-| **Shift 0 (Runs 1, 4, 7, 10)** | **Claude Haiku 5.5** | **GPT-6 Luna** | **Gemini 3.8 Flash** | Gemini 3.8 Flash (fixed) |
-| **Shift 1 (Runs 2, 5, 8, 11)** | **GPT-6 Luna** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | Gemini 3.8 Flash (fixed) |
-| **Shift 2 (Runs 3, 6, 9, 12)** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | **GPT-6 Luna** | Gemini 3.8 Flash (fixed) |
+| **Shift 0 (Runs 1, 4, 7)** | **Claude Haiku 5.5** | **GPT-6 Luna** | **Gemini 3.8 Flash** | Gemini 3.8 Flash (fixed) |
+| **Shift 1 (Runs 2, 5, 8)** | **GPT-6 Luna** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | Gemini 3.8 Flash (fixed) |
+| **Shift 2 (Runs 3, 6, 9)** | **Gemini 3.8 Flash** | **Claude Haiku 5.5** | **GPT-6 Luna** | Gemini 3.8 Flash (fixed) |
 
-Across 12 runs per condition (4 full cycles), every single model plays every corporate seat exactly 4 times ($N=4$ observations per cell; $N=48$ observations per model overall), ensuring completely unconfounded comparative benchmarks.
+Across 9 runs per condition (3 full balanced cycles), every single model plays every corporate seat exactly 3 times ($N=3$ observations per cell; $N=36$ player-games per model overall), ensuring completely unconfounded comparative benchmarks.
 
 ---
 
@@ -266,14 +266,15 @@ flowchart TD
   - Chang-Liu Cloud Services: Cloud Infrastructure (e.g. Google Gemini 3.8 Flash)
 - Pinned the Neutral Court-Appointed Arbitrator to a fixed benchmark (**Google Gemini 3.8 Flash** with reasoning) to ensure invariant, objective judicial awards across all conditions.
 
-### Phase 14: Balanced Latin Square Matrix Execution (48 Games) — *Completed*
-- Designed and executed a 3-agent cyclic Latin Square round-robin rotation ($ModelIndex = (RoleIndex + RunIndex) \pmod 3$) across 4 full cycles ($N=12$ runs/condition, 48 games total).
+### Phase 14: Balanced Latin Square Matrix Execution (36 Games) — *Completed*
+- Designed and executed a 3-agent cyclic Latin Square round-robin rotation ($ModelIndex = (RoleIndex + RunIndex) \pmod 3$) across 3 full cycles ($N=9$ runs/condition, 36 games total).
 - Completely eliminated the economic role/outside option confound, allowing unbiased cross-model capability comparison.
 - Uncovered powerful empirical findings:
-  - **Board Vote (100% deal rate, 1.7 avg rounds):** In 50% of games, the two smaller firms (Yang + Chang-Liu) formed an "Underdog Alliance" to outvote G-Corp and extract higher shares.
-  - **Arbitrator (100% deal rate, 4.8 avg rounds):** Zero walkaway violations; unanimous 3/3 ratified agreement in every single game.
-  - **MBRP (41.7% deal rate, 7.4 avg rounds):** High holdout and deadlock rate (58.3%) under strict sequential unanimity.
-  - **Model Surplus Extraction:** Gemini 3.8 Flash extracted **+$52,667** average surplus; GPT-6 Luna extracted **+$46,917**; Claude Haiku 5.5 extracted **+$25,417**.
+  - **Board Vote (100% deal rate, 1.8 avg rounds):** In 55.6% of games (5 of 9), the two smaller firms (Yang + Chang-Liu) formed an "Underdog Alliance" to outvote G-Corp and extract higher shares.
+  - **Arbitrator (100% deal rate, 4.7 avg rounds):** Zero walkaway violations; unanimous 3/3 ratified agreement in every single game.
+  - **Free Deliberation (100% deal rate, 5.7 avg rounds):** Conversational compromise preserved 100% surplus without predatory coalitions.
+  - **MBRP (55.6% deal rate, 7.2 avg rounds):** 4 of 9 games deadlocked under sequential unanimity vetoes.
+  - **Model Surplus Extraction:** Gemini 3.8 Flash extracted **+$58,750** average surplus; GPT-6 Luna extracted **+$50,000**; Claude Haiku 5.5 extracted **+$24,584**.
 
 ### Phase 15: Cross-Platform Windows Hardening & Real-Time Observability — *Completed*
 - **Filename Sanitization:** Replaced Windows-illegal colon characters (`:`) in model tags with underscores in `src/orchestrator.py` and added regex sanitization `re.sub(r'[\/:*?"<>|]', '_', model_name)` in `src/storage.py`, resolving `[Errno 22]` on Windows NTFS filesystems.

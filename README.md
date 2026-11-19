@@ -76,12 +76,17 @@ Three AI agents represent fictional corporate entities forming a joint venture t
 
 ## 4. Experimental Matrix & Infrastructure
 
-- **Grid:** 4 Conditions $\times$ 2 Model Tiers $\times$ 10 Runs = **80 Full Negotiations** (2,400+ multi-agent LLM invocations).
-- **Model Tiers:**
-  - `gemini-3.5-flash-lite` (Efficiency tier; `MINIMAL` thinking budget).
-  - `gemini-3.8-flash` (Reasoning tier; `LOW` thinking budget with internal chain-of-thought).
-- **Execution & Security:** Local execution in conda environment `ai-gov`, authenticated with GCP Vertex AI via Application Default Credentials (ADC) under project `ai-gov-514900`.
-- **Validation:** Native Pydantic schema validation (`sum == 1,000,000`, integer allocations, non-negative amounts).
+We evaluate governance mechanisms across two complementary experimental paradigms:
+
+1. **Homogeneous Baseline Matrix (80 Negotiations):**
+   - 4 Conditions $\times$ 2 Model Tiers (`gemini-3.5-flash-lite` vs. `gemini-3.8-flash`) $\times$ 10 Runs.
+   - Evaluates intra-model consensus, baseline capability thresholds, and institutional sensitivity.
+2. **Heterogeneous Latin Square Matrix (36 Negotiations):**
+   - 4 Conditions $\times$ 3 Competing Frontier Providers (**Anthropic Claude Haiku 5.5**, **OpenAI GPT-6 Luna**, **Google Gemini 3.8 Flash**) $\times$ 3 Balanced Latin Square Cycles ($N = 9$ runs per condition).
+   - Seating rotates round-robin via $\text{ModelIndex} = (\text{RoleIndex} + \text{RunIndex}) \pmod 3$, completely isolating model bargaining power from economic outside-option leverage.
+   - Fixed court-appointed Arbitrator pinned to **Google Gemini 3.8 Flash** with reasoning (`thinking_level="LOW"`).
+3. **Execution & Security:** Local execution in conda environment `ai-gov`, authenticated with GCP Vertex AI via ADC (`ai-gov-514900`), Anthropic API, and OpenAI API with zero secrets stored in Git.
+4. **Validation:** Native Pydantic schema validation (`sum == 1,000,000`, integer allocations, non-negative amounts, typed `Ballot` models).
 
 ---
 
@@ -166,12 +171,34 @@ Across all 80 runs, we measure each firm's disclosure propensity, mean dollar cl
 
 ---
 
-## 6. Visualizations
+### 5.6 Heterogeneous Latin Square Findings (36 Games, N=9 per Condition)
 
-- **Deal Rates Comparison:**  
-  [`results/deal_rate_comparison.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/deal_rate_comparison.png)
-- **Payoffs by Company Across Conditions:**  
-  [`results/payoffs_by_company.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/payoffs_by_company.png)
+To evaluate multi-agent bargaining under true provider diversity, we executed **36 games** across 3 balanced Latin Square cycles ($N=9$ runs per condition) with **Claude Haiku 5.5**, **GPT-6 Luna**, and **Gemini 3.8 Flash** competing simultaneously:
+
+| Governance Mechanism | Total Runs | Deals Reached | Deal Rate (%) | Mean Rounds | Realized Surplus | Surplus Efficiency | Mean Payoff: G-Corp (\$450k) | Mean Payoff: Yang (\$300k) | Mean Payoff: Chang-Liu (\$100k) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Neutral Arbitrator** *(Mediated)* | 9 | 9 | **100.0%** | **4.7** | **\$150,000** | **100.0%** | \$468,333 | \$325,556 | \$206,111 |
+| **Board Vote** *(Majority Rule)* | 9 | 9 | **100.0%** | **1.8** | **\$150,000** | **100.0%** | \$404,444 | \$325,556 | \$270,000 |
+| **Free Deliberation** *(Unstructured)* | 9 | 9 | **100.0%** | **5.7** | **\$150,000** | **100.0%** | \$452,222 | \$310,000 | \$237,778 |
+| **MBRP** *(Strict Alternating)* | 9 | 5 | **55.6%** | **7.2** | **\$83,333** | **55.6%** | \$445,000 | \$305,556 | \$182,778 |
+
+* **The 55.6% "Underdog Alliance" in Board Voting:** In **5 out of 9 games (55.6%)**, the two economically vulnerable firms (**Yang Industries** and **Chang-Liu Cloud Services**) allied in a 2-vs-1 majority to outvote the dominant chip designer (G-Corp), capturing massive surpluses (Chang-Liu averaged **\$270,000**, a **+\$170k windfall** over its \$100k walkaway).
+* **Arbitration Guarantees Pareto-Optimality:** Neutral Arbitration reached **100% agreement** with **zero walkaway violations**, achieving the closest convergence to the symmetric Nash bargaining solution (\$69k distance).
+* **The Unanimity Curse:** Under MBRP, rigid sequential vetoes led to a **44.4% deadlock rate**, destroying \$66,667 in cooperative surplus per failure.
+* **Normalized Model Capability Benchmark (N=36 Player-Games Each):**
+  - **Google Gemini 3.8 Flash:** **\$342,083** average payoff (**+\$58,750** surplus above walkaway)
+  - **OpenAI GPT-6 Luna:** **\$333,333** average payoff (**+\$50,000** surplus above walkaway)
+  - **Anthropic Claude Haiku 5.5:** **\$307,917** average payoff (**+\$24,584** surplus above walkaway)
+
+---
+
+## 6. Publication Visualizations
+
+All 300-DPI publication figures are generated and stored in [`results/plots/`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/plots/):
+- **Figure 1 (Governance Mechanism Efficiency):** [`results/plots/fig1_governance_efficiency.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/plots/fig1_governance_efficiency.png)
+- **Figure 2 (Deliberation Rounds to Agreement):** [`results/plots/fig2_rounds_distribution.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/plots/fig2_rounds_distribution.png)
+- **Figure 3 (Baron-Ferejohn Coalitional Breakdown):** [`results/plots/fig3_board_vote_coalitions.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/plots/fig3_board_vote_coalitions.png)
+- **Figure 4 (Normalized Model Surplus Extraction):** [`results/plots/fig4_latin_square_model_surplus.png`](file:///c:/Users/anany/Desktop/AI%20Gov/final_project/results/plots/fig4_latin_square_model_surplus.png)
 
 ---
 
@@ -179,43 +206,42 @@ Across all 80 runs, we measure each firm's disclosure propensity, mean dollar cl
 
 ```text
 final_project/
-├── IMPLEMENTATION_PLAN.md    # Master architectural contract
+├── IMPLEMENTATION_PLAN.md    # Master architectural contract & phase roadmap
 ├── README.md                 # This overview document
 ├── config.yaml               # Model parameters & experimental settings (4 conditions)
 ├── requirements.txt          # Python dependencies
 │
-├── ideation/                 # Evolution & review documentation
-│   ├── ANTIGRAVITY_GCP_HANDOFF.md
-│   ├── ASSESSMENT_CHATGPT_SUGGESTIONS.md
-│   └── PROTOCOL_SUMMARY.md
-│
-├── src/                      # Core implementation
+├── src/                      # Core multi-provider implementation
 │   ├── agents.py             # Agent prompts & structured turn wrappers
-│   ├── llm.py                # Vertex AI client adapter & backoff retry logic
+│   ├── llm.py                # Multi-provider gateway (Vertex AI, Anthropic, OpenAI, Ollama)
 │   ├── metrics.py            # Nash distance, coalition breakdown & bluffing metrics
-│   ├── orchestrator.py       # Multi-run experiment engine
-│   ├── schemas.py            # Pydantic schemas for structured JSON output
-│   ├── storage.py            # Event logging & summary appending (38 columns)
+│   ├── orchestrator.py       # Multi-run experiment engine (homogeneous & mixed-model)
+│   ├── schemas.py            # Pydantic schemas for structured JSON output & typed Ballot
+│   ├── storage.py            # Windows-hardened event logging & summary.csv appending
 │   ├── validators.py         # Arithmetic & walk-away domain checks
 │   └── conditions/           # State machines
 │       ├── base.py           # Shared base protocol & result compiler
 │       ├── mbrp.py           # Rotating proposer protocol
 │       ├── board_vote.py     # Deliberation, motion, and ballot voting
-│       ├── arbitrator.py     # Confidential caucusing and neutral award
+│       ├── arbitrator.py     # Confidential caucusing and neutral award (pinned Gemini judge)
 │       └── free_negotiation.py # Conversational turn-based bargaining
 │
 ├── scripts/                  # Executable entry points
-│   ├── run_experiments.py    # Master runner supporting CLI filtering
+│   ├── run_experiments.py    # Master homogeneous runner supporting CLI filtering
+│   ├── run_mixed_model.py    # Heterogeneous runner with Latin Square round-robin rotation
+│   ├── generate_paper_artifacts.py # Generates 300 DPI publication plots and LaTeX tables
+│   ├── test_providers.py     # Multi-provider connectivity and structured output test
 │   ├── run_pilot.py          # 3-run verification pilot
-│   └── analyze_results.py    # Visualizations & comprehensive statistics generator
+│   └── analyze_results.py    # Statistics and reporting generator
 │
 ├── tests/                    # Test suite (19 unit tests passing)
 │   ├── test_conditions_mock.py
 │   ├── test_validators.py
 │   └── test_metrics.py
 │
-├── results/                  # summary.csv (80 runs, 38 columns) and plots
-└── transcripts/              # 80 multi-turn JSONL negotiation transcripts
+├── results/                  # summary.csv (136 logged runs, 38 columns) and plots
+│   └── plots/                # High-resolution publication figures (Figures 1-4)
+└── transcripts/              # 136 multi-turn JSONL negotiation transcripts
 ```
 
 ---

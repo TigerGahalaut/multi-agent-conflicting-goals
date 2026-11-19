@@ -25,7 +25,16 @@ def load_and_clean_data():
     def categorize_run(row):
         rid = str(row["run_id"])
         if rid.startswith("mixed_"):
-            return "Heterogeneous (Latin Square)"
+            try:
+                tokens = rid.split("_")
+                ts = int(tokens[-2])
+            except Exception:
+                ts = 0
+            # Strictly select the 9-run Latin Square batch (36 games, timestamps >= 1795068000)
+            if ts >= 1795068000:
+                return "Heterogeneous (Latin Square)"
+            else:
+                return "Heterogeneous (Initial Pilot)"
         elif "gemini-3.5-flash-lite" in rid or "gemini-3.8-flash" in rid:
             return "Homogeneous (Gemini Baseline)"
         else:
@@ -148,7 +157,7 @@ def plot_rounds_distribution(df):
         ax=ax
     )
 
-    ax.set_title("Deliberation Rounds to Outcome (Heterogeneous Latin Square, N=48)", fontweight="bold", pad=12)
+    ax.set_title("Deliberation Rounds to Outcome (Heterogeneous Latin Square, N=36)", fontweight="bold", pad=12)
     ax.set_xlabel("Governance Mechanism", fontweight="bold")
     ax.set_ylabel("Rounds Taken (Deadline = 8)", fontweight="bold")
     ax.set_ylim(0.5, 8.5)
@@ -183,7 +192,7 @@ def plot_board_vote_coalitions(df):
     colors = ["#d95f02", "#1b9e77", "#7570b3"]
     bars = ax.bar(coalition_counts["clean_label"], coalition_counts["count"], color=colors, width=0.55, edgecolor="black")
 
-    ax.set_title("Winning 2-vs-1 Coalitions in Board Vote (N=12 Games)", fontweight="bold", pad=12)
+    ax.set_title("Winning 2-vs-1 Coalitions in Board Vote (N=9 Games)", fontweight="bold", pad=12)
     ax.set_xlabel("Majority Coalition Formed", fontweight="bold")
     ax.set_ylabel("Number of Games Passed", fontweight="bold")
     ax.set_ylim(0, 8)
@@ -201,7 +210,7 @@ def plot_board_vote_coalitions(df):
 
 
 def plot_latin_square_model_surplus(df):
-    """Figure 4: Average Payoff & Net Surplus by LLM Provider across Latin Square (N=48)."""
+    """Figure 4: Average Payoff & Net Surplus by LLM Provider across Latin Square (N=36)."""
     sns.set_theme(style="whitegrid", font_scale=1.1)
     fig, ax = plt.subplots(figsize=(9, 5.5))
 
@@ -248,7 +257,7 @@ def plot_latin_square_model_surplus(df):
     colors = ["#4285F4", "#10A37F", "#CC785C"]
     bars = ax.bar(summary["model"], summary["avg_surplus"], color=colors, width=0.5, edgecolor="black")
 
-    ax.set_title("Normalized Surplus Extracted by LLM Provider (Latin Square N=48)", fontweight="bold", pad=12)
+    ax.set_title("Normalized Surplus Extracted by LLM Provider (Latin Square N=36)", fontweight="bold", pad=12)
     ax.set_xlabel("LLM Provider / Model", fontweight="bold")
     ax.set_ylabel("Average Net Surplus Extracted Above Outside Option ($)", fontweight="bold")
     ax.yaxis.set_major_formatter('${x:,.0f}')
